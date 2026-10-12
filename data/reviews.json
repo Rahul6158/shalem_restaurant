@@ -1,0 +1,34 @@
+[
+  {
+    "id": "REV_DEFAULT_1",
+    "name": "Suresh Kumar",
+    "rating": 5,
+    "text": "Excellent taste and service. The Chicken Fried Rice is packed with flavor, and the catering staff was incredibly polite at my brother's wedding.",
+    "role": "Event Host, Valluru",
+    "createdAt": "2026-06-25T07:21:50.885Z"
+  },
+  {
+    "id": "REV_DEFAULT_2",
+    "name": "Rani Prasanna",
+    "rating": 5,
+    "text": "Best catering service for our family function. They set up a clean, beautiful buffet stall, and the food was served sizzling hot. Everyone loved it!",
+    "role": "Family Celebration, Valluru",
+    "createdAt": "2026-06-25T07:21:50.886Z"
+  },
+  {
+    "id": "REV_DEFAULT_3",
+    "name": "K. Srinivas",
+    "rating": 5,
+    "text": "Fresh food and reasonable prices. Our go-to spot for weekend cravings. Their Veg and Chicken Noodles are the absolute best in town.",
+    "role": "Local Customer",
+    "createdAt": "2026-06-25T07:21:50.886Z"
+  },
+  {
+    "id": "REV_1782372381403",
+    "name": "Ramesh",
+    "rating": 4,
+    "text": "The fried rice is delicious and always served hot!",
+    "role": "Local Customer",
+    "createdAt": "2026-06-25T07:26:21.403Z"
+  }
+]

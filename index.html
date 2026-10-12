@@ -1,0 +1,1781 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shalem Restaurant | Fried Rice, Noodles & Catering Services in Valluru</title>
+    <meta name="description" content="Enjoy fresh, tasty, and hygienic Fried Rice, Noodles, and professional catering services in Valluru. Serving weddings, birthdays, corporate events, and more.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon-round.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon-round.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js for client-side PDF downloads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Announcement Banner -->
+    <div class="announcement-banner" id="announcement-banner">
+        <div class="banner-content">
+            <span class="banner-icon">🔴</span>
+            <span class="banner-text" id="banner-text-content">Shalem Restaurant is Closed Today. We apologize for the inconvenience. Please contact us on WhatsApp for catering inquiries.</span>
+        </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="container header-container">
+            <a href="#home" class="logo-area">
+                <img src="assets/images/logo.png" alt="Shalem Restaurant Logo" class="logo-img">
+                <div class="logo-name-wrapper">
+                    <span class="logo-text">Shalem <span class="accent-text">Restaurant</span></span>
+                    <span id="store-status-badge" class="status-badge closed">
+                        <span class="status-dot"></span> <span class="status-text">Closed Now</span>
+                    </span>
+                    <span id="store-status-sub" class="status-sub-text">Food Orders and Catering Bookings Available.</span>
+                </div>
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="navbar" id="navbar">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#menu" class="nav-link">Menu</a></li>
+                    <li><a href="javascript:void(0)" onclick="openFlipbookModal()" class="nav-link" style="color: var(--accent); font-weight: 600;"><i class="fa-solid fa-book-open"></i> Booklet</a></li>
+                    <li><a href="#catering" class="nav-link">Catering</a></li>
+                    <li><a href="#why-choose-us" class="nav-link">Why Us</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#reviews" class="nav-link">Reviews</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions: Call Button & Mobile Menu Toggle -->
+            <div class="header-actions">
+                <div class="header-cta">
+                    <a href="tel:+919999999999" class="btn btn-primary btn-call btn-pulse" id="header-call-btn" aria-label="Call Shalem Restaurant">
+                        <i class="fa-solid fa-phone"></i> <span>Call Now</span>
+                    </a>
+                </div>
+                <button class="mobile-nav-toggle" aria-label="Toggle menu" id="menu-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-tagline"><i class="fa-solid fa-utensils"></i> Welcome to Shalem Restaurant</span>
+                <h1 class="hero-title animate-text">
+                    Fresh & Delicious <br>Food for <span class="gradient-text">Every Occasion</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Fried Rice, Noodles & Professional Catering Services in Valluru. We blend fresh ingredients, hygienic preparation, and authentic flavors to create unforgettable meals.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn btn-primary">
+                        <i class="fa-solid fa-square-rss"></i> Order Now
+                    </a>
+                    <button type="button" class="btn btn-flipbook-hero" onclick="openFlipbookModal()">
+                        <i class="fa-solid fa-book-open"></i> Virtual Menu Booklet
+                    </button>
+                    <a href="#catering" class="btn btn-secondary">
+                        <i class="fa-solid fa-calendar-check"></i> Book Catering
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <a href="#about" class="scroll-down-indicator" aria-label="Scroll Down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-side">
+                    <div class="image-wrapper">
+                        <img src="assets/images/logo.png" alt="Shalem Restaurant Presentation" class="about-main-img">
+                        <div class="badge-experience">
+                            <span class="number">100%</span>
+                            <span class="text">Fresh & Hygienic</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content-side">
+                    <div class="section-header">
+                        <span class="section-subtitle">Serving since 15 years</span>
+                        <h2 class="section-title">About Shalem Restaurant</h2>
+                    </div>
+                    <p class="about-description">
+                        Shalem Restaurant is dedicated to serving fresh, tasty, and hygienic food. Located in Valluru, we have built a reputation for exquisite taste and unmatched service. 
+                    </p>
+                    <p class="about-description-secondary">
+                        We specialize in preparing mouth-watering <strong>Fried Rice</strong> and <strong>Noodles</strong>, along with providing stellar <strong>catering services</strong> for weddings, birthdays, family functions, corporate events, and more. No matter the event scale, our goal is to deliver flavor and hospitality that delights every guest.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature-item">
+                            <i class="fa-solid fa-bowl-food feature-icon"></i>
+                            <div>
+                                <h4>Authentic Wok Masters</h4>
+                                <p>Sizzling hot, perfectly seasoned rice and noodles.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <i class="fa-solid fa-champagne-glasses feature-icon"></i>
+                            <div>
+                                <h4>Premium Event Catering</h4>
+                                <p>Customized menus for any occasion, big or small.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Special Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Savor the Flavors</span>
+                <h2 class="section-title">Our Special Menu</h2>
+                <p class="section-desc">Handcrafted items prepared hot and fresh on your order. Select a category below to explore.</p>
+                <div style="margin-top: 15px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-flipbook-hero" onclick="openFlipbookModal()" style="font-size: 0.95rem; padding: 10px 24px; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-book-open"></i> Open Virtual Menu Booklet 📖
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-download-pdf-cta" onclick="downloadMenuPDF()" style="font-size: 0.95rem; padding: 10px 24px; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-file-pdf"></i> Download Menu PDF 📄
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Tabs/Filters -->
+            <div class="menu-filters">
+                <button class="filter-btn active" data-filter="all">All Items</button>
+                <button class="filter-btn" data-filter="fried-rice">Fried Rice</button>
+                <button class="filter-btn" data-filter="noodles">Noodles</button>
+                <button class="filter-btn" data-filter="special-orders">Special Orders</button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="menu-grid">
+                <!-- Fried Rice -->
+                <div class="menu-card" data-category="fried-rice" data-stock-id="stock_veg_fried_rice">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/fried-rice.png" alt="Veg Fried Rice" class="menu-img">
+                        <span class="menu-badge veg">Veg</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Veg Fried Rice</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Hot</span>
+                        </div>
+                        <p class="menu-item-desc">Premium basmati rice tossed with fresh carrots, beans, spring onions, and oriental spices in a high-flame wok.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Veg Fried Rice', 'Fried Rice')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="fried-rice" data-stock-id="stock_egg_fried_rice">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/fried-rice.png" alt="Egg Fried Rice" class="menu-img">
+                        <span class="menu-badge nonveg">Egg</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Egg Fried Rice</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Popular</span>
+                        </div>
+                        <p class="menu-item-desc">Fluffy wok-tossed rice with scrambled eggs, fresh green onions, shredded vegetables, and light soy sauce.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Egg Fried Rice', 'Fried Rice')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="fried-rice" data-stock-id="stock_chicken_fried_rice">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/fried-rice.png" alt="Chicken Fried Rice" class="menu-img">
+                        <span class="menu-badge nonveg">Non-Veg</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Chicken Fried Rice</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Best Seller</span>
+                        </div>
+                        <p class="menu-item-desc">Succulent chunks of marinated chicken breast, wok-tossed with premium rice, eggs, scallions, and signature spices.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Chicken Fried Rice', 'Fried Rice')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Noodles -->
+                <div class="menu-card" data-category="noodles" data-stock-id="stock_veg_noodles">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/noodles.png" alt="Veg Noodles" class="menu-img">
+                        <span class="menu-badge veg">Veg</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Veg Noodles</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Hot</span>
+                        </div>
+                        <p class="menu-item-desc">Soft noodles stir-fried with crunchy cabbage, bell peppers, carrots, onions, and savory dark soy sauce.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Veg Noodles', 'Noodles')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="noodles" data-stock-id="stock_egg_noodles">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/noodles.png" alt="Egg Noodles" class="menu-img">
+                        <span class="menu-badge nonveg">Egg</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Egg Noodles</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Classic</span>
+                        </div>
+                        <p class="menu-item-desc">Stir-fried noodles loaded with scrambled eggs, julienne vegetables, garlic, and home-style oriental seasonings.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Egg Noodles', 'Noodles')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="noodles" data-stock-id="stock_chicken_noodles">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/noodles.png" alt="Chicken Noodles" class="menu-img">
+                        <span class="menu-badge nonveg">Non-Veg</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Chicken Noodles</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Chef's Choice</span>
+                        </div>
+                        <p class="menu-item-desc">Sautéed chicken strips, fresh noodles, scrambled eggs, and colorful veggies wok-tossed in robust spicy sauces.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Chicken Noodles', 'Noodles')">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Special Orders -->
+                <div class="menu-card" data-category="special-orders" data-stock-id="stock_biryani">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/hero-banner.png" alt="Biryani" class="menu-img">
+                        <span class="menu-badge premium">Special</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Biryani</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Weekend Spl</span>
+                        </div>
+                        <p class="menu-item-desc">Aromatic long grain basmati rice layered with rich spices and tender, flavorful meat cooked to perfection.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Biryani', 'Special Orders')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="special-orders" data-stock-id="stock_meals">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/catering-buffet.png" alt="Meals" class="menu-img">
+                        <span class="menu-badge veg">Meals</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Traditional Meals</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Comfort Food</span>
+                        </div>
+                        <p class="menu-item-desc">Wholesome traditional plate complete with rice, dal, subji, sambar, rasam, curd, and papad. Perfectly hygienic.</p>
+                        <button class="btn btn-card-order" onclick="openOrderModal('Traditional Meals', 'Special Orders')">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="menu-card" data-category="special-orders" data-stock-id="stock_party_orders">
+                    <div class="menu-img-wrapper">
+                        <img src="assets/images/event-catering.png" alt="Party Orders" class="menu-img">
+                        <span class="menu-badge premium">Bulk</span>
+                        <div class="stock-overlay"><i class="fa-solid fa-ban"></i> Not Available</div>
+                    </div>
+                    <div class="menu-card-body">
+                        <div class="menu-title-row">
+                            <h3 class="menu-item-name">Party Orders</h3>
+                            <span class="menu-price"><i class="fa-solid fa-tag"></i> Custom</span>
+                        </div>
+                        <p class="menu-item-desc">Special customized family packages and platter menus crafted specifically for small and medium gatherings.</p>
+                        <button class="btn btn-card-order" onclick="openCateringModal('Party Orders')">Inquire Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catering Services Section -->
+    <section class="catering" id="catering">
+        <div class="catering-bg-overlay"></div>
+        <div class="container">
+            <div class="catering-grid">
+                <div class="catering-content">
+                    <div class="section-header">
+                        <span class="section-subtitle">Professional Services</span>
+                        <h2 class="section-title text-light">Catering for All Events</h2>
+                        <p class="catering-intro">We bring culinary excellence right to your venue. Offering tailored buffet setups, friendly waitstaff, and exceptionally delicious foods for events of all formats.</p>
+                    </div>
+
+                    <div class="catering-services-list">
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-heart"></i></div>
+                            <span>Wedding Catering</span>
+                        </div>
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-cake-candles"></i></div>
+                            <span>Birthday Parties</span>
+                        </div>
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-house-chimney-window"></i></div>
+                            <span>Housewarming Functions</span>
+                        </div>
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-briefcase"></i></div>
+                            <span>Corporate Events</span>
+                        </div>
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-people-group"></i></div>
+                            <span>Family Gatherings</span>
+                        </div>
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-om"></i></div>
+                            <span>Festival Celebrations</span>
+                        </div>
+                        <div class="catering-item">
+                            <div class="icon-box"><i class="fa-solid fa-bus"></i></div>
+                            <span>Vacation & Tour Group Food Service</span>
+                        </div>
+                    </div>
+
+                    <div class="catering-action">
+                        <button class="btn btn-primary btn-pulse" onclick="openCateringModal('General Event')">
+                            <i class="fa-solid fa-envelope-open-text"></i> Book Catering Service
+                        </button>
+                    </div>
+                </div>
+                <div class="catering-image">
+                    <div class="image-stack">
+                        <img src="assets/images/catering-buffet.png" alt="Shalem Catering Buffet Setup" class="catering-img-main">
+                        <div class="catering-tag-box">
+                            <i class="fa-solid fa-award"></i>
+                            <div>
+                                <h5>Premium Taste</h5>
+                                <p>Hygienic setup & server staff</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catering Menu Planner Container -->
+            <div class="catering-menu-planner">
+                <div class="planner-header text-center">
+                    <h3 class="planner-title"><i class="fa-solid fa-list-check"></i> Interactive Catering Menu Planner</h3>
+                    <p class="planner-desc">Select the dishes you want for your event. We will build your customized catering package based on your requirements!</p>
+                </div>
+                
+                <!-- Category Tabs -->
+                <div class="planner-tabs">
+                    <button class="planner-tab-btn active" onclick="switchPlannerTab('rice', this)">🍚 Rice & Biryani</button>
+                    <button class="planner-tab-btn" onclick="switchPlannerTab('curry', this)">🍛 Curries</button>
+                    <button class="planner-tab-btn" onclick="switchPlannerTab('fry', this)">🍳 Fry Items</button>
+                    <button class="planner-tab-btn" onclick="switchPlannerTab('traditional', this)">🥣 Traditional Items</button>
+                    <button class="planner-tab-btn" onclick="switchPlannerTab('sweets_snacks', this)">🍮 Sweets & Snacks</button>
+                    <button class="planner-tab-btn" onclick="switchPlannerTab('bajji', this)">🌶️ Bajji Items</button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div class="planner-tab-contents">
+                    <!-- Rice Tab -->
+                    <div class="planner-pane active" id="pane-rice">
+                        <div class="dishes-grid">
+                            <div class="dish-item" onclick="toggleCateringDish('Rice', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Rice</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Biryani', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Biryani</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Dum Biryani', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Dum Biryani</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Fried Rice', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Fried Rice</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Mixed Biryani', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Mixed Biryani</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pulihora', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pulihora</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Palu Annam (Milk Rice)', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Palu Annam (Milk Rice)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Curry Tab -->
+                    <div class="planner-pane" id="pane-curry">
+                        <div class="curry-section-title">🥗 Veg Curries</div>
+                        <div class="dishes-grid" style="margin-bottom: 30px;">
+                            <div class="dish-item" onclick="toggleCateringDish('Drumstick Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Drumstick Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Paneer Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Paneer Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Brinjal Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Brinjal Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Guthi Vankaya Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Guthi Vankaya Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Potato Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Potato Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pulla Makkani Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pulla Makkani Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Gongura Senagalu', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Gongura Senagalu</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Vankaya Jeedipappu', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Vankaya Jeedipappu</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Cauliflower Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Cauliflower Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Mirchi Ka Salan Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Mirchi Ka Salan Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Cabbage Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Cabbage Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Beans Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Beans Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Bendakaya Pulusu', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Bendakaya Pulusu</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Mushroom Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Mushroom Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Mamidikaya Jeedipappu', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Mamidikaya Jeedipappu</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Curd', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Curd</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Raita', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Raita</span>
+                            </div>
+                        </div>
+
+                        <div class="curry-section-title" style="margin-top: 20px;">🍗 Non-Veg Curries</div>
+                        <div class="dishes-grid">
+                            <div class="dish-item" onclick="toggleCateringDish('Fish Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Fish Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Fish Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Fish Fry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Chicken Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Chicken Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Mutton Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Mutton Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Chicken Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Chicken Fry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Crabs Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Crabs Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Prawns Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Prawns Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Egg Curry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Egg Curry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Chicken Kabab', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Chicken Kabab</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fry Tab -->
+                    <div class="planner-pane" id="pane-fry">
+                        <div class="dishes-grid">
+                            <div class="dish-item" onclick="toggleCateringDish('Cauliflower Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Cauliflower Fry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Dondakaya Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Dondakaya Fry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Potato Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Potato Fry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Cabbage Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Cabbage Fry</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Bendakaya Fry', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Bendakaya Fry</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Traditional Tab -->
+                    <div class="planner-pane" id="pane-traditional">
+                        <div class="dishes-grid">
+                            <div class="dish-item" onclick="toggleCateringDish('Sambar', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Sambar</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Rasam', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Rasam</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Gumadikaya Dappalam', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Gumadikaya Dappalam</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pappu', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pappu</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pappu Tomata', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pappu Tomata</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pappu Anabakay', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pappu Anabakay</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pappu Mamidikay', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pappu Mamidikay</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Pappu Cabbage', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pappu Cabbage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sweets & Snacks Tab -->
+                    <div class="planner-pane" id="pane-sweets_snacks">
+                        <div class="curry-section-title">🍬 Sweets</div>
+                        <div class="dishes-grid" style="margin-bottom: 30px;">
+                            <div class="dish-item" onclick="toggleCateringDish('Bread Halwa', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Bread Halwa</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Kesari', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Kesari</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Halwa', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Halwa</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Carrot Halwa', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Carrot Halwa</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Bottle Gourd Halwa', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Bottle Gourd Halwa</span>
+                            </div>
+                        </div>
+
+                        <div class="curry-section-title" style="margin-top: 20px;">🍘 Snacks & Sides</div>
+                        <div class="dishes-grid">
+                            <div class="dish-item" onclick="toggleCateringDish('Garelu (Vada)', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Garelu (Vada)</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Boorelu', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Boorelu</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Chips', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Chips</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Appadam (Papad)', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Appadam (Papad)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bajji Tab -->
+                    <div class="planner-pane" id="pane-bajji">
+                        <div class="dishes-grid">
+                            <div class="dish-item" onclick="toggleCateringDish('Pachimirapakaya Bajji', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Pachimirapakaya Bajji</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Aratikaya Bajji', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Aratikaya Bajji</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Egg Bajji', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Egg Bajji</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Vammu Aaku Bajji', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Vammu Aaku Bajji</span>
+                            </div>
+                            <div class="dish-item" onclick="toggleCateringDish('Potato Bajji', this)">
+                                <i class="fa-regular fa-square check-icon"></i>
+                                <span>Potato Bajji</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Bar -->
+                <div class="planner-summary-bar">
+                    <div class="selected-count-area">
+                        <span class="count-badge" id="selected-dishes-count">0</span>
+                        <span>items selected for your custom menu</span>
+                    </div>
+                    <div class="custom-available-badge">
+                        <i class="fa-solid fa-circle-check"></i> Custom Menu Available
+                    </div>
+                    <div class="planner-actions">
+                        <button class="btn btn-clear" onclick="clearCateringPlannerSelection()">
+                            <i class="fa-solid fa-trash-can"></i> Clear Selection
+                        </button>
+                        <button class="btn btn-primary" onclick="openCateringModalWithPlanner()">
+                            <i class="fa-solid fa-calendar-days"></i> Book Catering with Selected Items
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us" id="why-choose-us">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Our Guarantee</span>
+                <h2 class="section-title">Why Choose Us?</h2>
+                <p class="section-desc">What sets Shalem Restaurant apart is our unwavering commitment to quality and service hospitality.</p>
+            </div>
+
+            <div class="why-us-grid">
+                <div class="why-card">
+                    <div class="why-icon-container">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>We source fresh produce and premium quality meat daily to ensure every plate bursts with authentic, natural flavors.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-icon-container">
+                        <i class="fa-solid fa-hand-holding-hand"></i>
+                    </div>
+                    <h3>Hygienic Preparation</h3>
+                    <p>Cleanliness is our top priority. Our kitchens are sanitized constantly and staff adhere to the highest hygiene standards.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-icon-container">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Affordable Prices</h3>
+                    <p>Enjoy premium, delicious food that fits comfortably within your budget, without compromising on quality or portion sizes.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-icon-container">
+                        <i class="fa-solid fa-truck-ramp-box"></i>
+                    </div>
+                    <h3>On-Time Delivery</h3>
+                    <p>Whether it's a piping hot home order or a major buffet layout, we promise prompt, reliable, and timely setups.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-icon-container">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h3>Experienced Catering Team</h3>
+                    <p>Our professional chefs and servers have years of hospitality experience to coordinate seamless food service.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-icon-container">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h3>Customized Menus</h3>
+                    <p>Create your custom catering package by mixing and matching dishes to match your tastes and event themes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Visual Feast</span>
+                <h2 class="section-title">Food Gallery</h2>
+                <p class="section-desc">Take a visual tour of our culinary preparation and elegant event setups.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="assets/images/fried-rice.png" alt="Chicken Fried Rice">
+                    <div class="gallery-hover">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Chicken Fried Rice</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="assets/images/fried-rice.png" alt="Veg Fried Rice">
+                    <div class="gallery-hover">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Veg Fried Rice</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="assets/images/noodles.png" alt="Chicken Noodles">
+                    <div class="gallery-hover">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Chicken Noodles</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="assets/images/event-catering.png" alt="Catering Setup">
+                    <div class="gallery-hover">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Catering Setup</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="assets/images/catering-buffet.png" alt="Buffet Counter">
+                    <div class="gallery-hover">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Buffet Counter</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this)">
+                    <img src="assets/images/hero-banner.png" alt="Family Function Catering">
+                    <div class="gallery-hover">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Family Function Catering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-subtitle">Testimonials</span>
+                <h2 class="section-title">Customer Reviews</h2>
+                <p class="section-desc">Read what our happy diners and event hosts say about Shalem Restaurant.</p>
+                <div style="margin-top: 24px;">
+                    <button class="btn btn-primary" onclick="openReviewModal()">
+                        <i class="fa-solid fa-star"></i> Write a Review & Rate Us
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reviews Grid (Populated dynamically via script.js) -->
+            <div class="reviews-grid" id="reviews-container">
+                <!-- Dynamic cards will render here. Static fallback: -->
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="review-text">"Excellent taste and service. The Chicken Fried Rice is packed with flavor, and the catering staff was incredibly polite at my brother's wedding."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Suresh Kumar</h4>
+                            <span>Event Host, Valluru</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="review-text">"Best catering service for our family function. They set up a clean, beautiful buffet stall, and the food was served sizzling hot. Everyone loved it!"</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>Rani Prasanna</h4>
+                            <span>Family Celebration, Valluru</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="review-text">"Fresh food and reasonable prices. Our go-to spot for weekend cravings. Their Veg and Chicken Noodles are the absolute best in town."</p>
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h4>K. Srinivas</h4>
+                            <span>Local Customer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-card-box">
+                <div class="contact-grid">
+                    <!-- Info details -->
+                    <div class="contact-info-panel">
+                        <h3>Shalem Restaurant</h3>
+                        <p class="contact-sub">Fresh food & catering services tailored to you.</p>
+                        
+                        <div class="info-details-list">
+                            <div class="info-detail-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <h5>Address</h5>
+                                    <p>Valluru, Andhra Pradesh</p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-detail-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <h5>Phone Number</h5>
+                                    <p><a href="tel:XXXXXXXXXX">XXXXXXXXXX</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-detail-item">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <div>
+                                    <h5>WhatsApp</h5>
+                                    <p><a href="https://wa.me/XXXXXXXXXX" target="_blank">XXXXXXXXXX</a></p>
+                                </div>
+                            </div>
+                            
+                            <div class="info-detail-item">
+                                <i class="fa-solid fa-clock"></i>
+                                <div>
+                                    <h5>Opening Hours</h5>
+                                    <p>Open Daily: 5:00 PM to 9:00 PM</p>
+                                    <p class="holiday-note">Every Tuesday is a Holiday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Contact Form -->
+                    <div class="contact-form-panel">
+                        <h4>Send Us a Message</h4>
+                        <form id="quick-contact-form" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="form-name">Your Name</label>
+                                <input type="text" id="form-name" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="form-phone">Phone Number</label>
+                                    <input type="tel" id="form-phone" placeholder="Your phone number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-type">Inquiry Type</label>
+                                    <select id="form-type">
+                                        <option value="Food Order">Food Order</option>
+                                        <option value="Catering Service">Catering Booking</option>
+                                        <option value="General Question">General Inquiry</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-message">Message Details</label>
+                                <textarea id="form-message" rows="4" placeholder="Tell us what you want to order or details about your event..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action (CTA) Section -->
+    <section class="cta-banner">
+        <div class="container text-center">
+            <h2>Ready to Order?</h2>
+            <p>Contact Shalem Restaurant today for delicious food and professional catering services. Experience flavor like never before.</p>
+            <div class="cta-banner-buttons">
+                <a href="tel:XXXXXXXXXX" class="btn btn-primary btn-pulse">
+                    <i class="fa-solid fa-phone"></i> Call Now
+                </a>
+                <a href="https://wa.me/XXXXXXXXXX" target="_blank" class="btn btn-success">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="logo-area">
+                        <img src="assets/images/logo.png" alt="Shalem Logo" class="logo-img">
+                        <span class="logo-text">Shalem <span class="accent-text">Restaurant</span></span>
+                    </a>
+                    <p>Fresh & Delicious Food for Every Occasion. We cater to weddings, birthdays, parties, corporate events, and daily local cravings.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Our Menu</a></li>
+                        <li><a href="#catering">Catering Services</a></li>
+                        <li><a href="#why-choose-us">Why Choose Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-info">
+                    <h4>Contact Info</h4>
+                    <p><i class="fa-solid fa-location-dot"></i> Valluru, Andhra Pradesh</p>
+                    <p><i class="fa-solid fa-phone"></i> <a href="tel:XXXXXXXXXX">XXXXXXXXXX</a></p>
+                    <p><i class="fa-brands fa-whatsapp"></i> <a href="https://wa.me/XXXXXXXXXX" target="_blank">XXXXXXXXXX</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <p>&copy; 2026 Shalem Restaurant. All Rights Reserved.</p>
+                <a href="admin.html" class="admin-link" style="color: var(--text-muted); font-size: 0.85rem; opacity: 0.7; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><i class="fa-solid fa-lock"></i> Staff Admin</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox for Gallery -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Zoomed view" class="lightbox-img" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption">Caption text</div>
+    </div>
+
+    <!-- Order Modal (Dynamic popup) -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('order-modal')">&times;</span>
+            <div class="modal-header">
+                <h3>Place Food Order</h3>
+            </div>
+            <div class="modal-body">
+                <p>Ordering: <strong id="modal-item-name" class="accent-text">Veg Fried Rice</strong> (<span id="modal-item-category">Fried Rice</span>)</p>
+                <div class="form-group">
+                    <label for="order-quantity">Quantity</label>
+                    <input type="number" id="order-quantity" value="1" min="1" max="50">
+                </div>
+                <div class="form-group">
+                    <label for="order-instructions">Special Instructions (optional)</label>
+                    <input type="text" id="order-instructions" placeholder="e.g. Make it extra spicy, less oil...">
+                </div>
+                <button class="btn btn-primary btn-block" onclick="submitOrder()">
+                    <i class="fa-brands fa-whatsapp"></i> Send Order via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catering Booking Modal -->
+    <div class="modal" id="catering-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('catering-modal')">&times;</span>
+            <div class="modal-header">
+                <h3>Book Catering Service</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="catering-name">Your Name</label>
+                    <input type="text" id="catering-name" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="catering-phone">Phone Number</label>
+                    <input type="tel" id="catering-phone" placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label for="catering-address">Event / Delivery Address</label>
+                    <input type="text" id="catering-address" placeholder="Enter complete address">
+                </div>
+                <div class="form-group">
+                    <label for="catering-event-type">Event Type</label>
+                    <select id="catering-event-type">
+                        <option value="Wedding Catering">Wedding Catering</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Housewarming Function">Housewarming Function</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Family Gathering">Family Gathering</option>
+                        <option value="Festival Celebration">Festival Celebration</option>
+                        <option value="Tour Group Food Service">Tour Group Food Service</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="catering-guests">Estimated Guests</label>
+                    <input type="number" id="catering-guests" value="100" min="20" step="10">
+                </div>
+                <div class="form-group">
+                    <label for="catering-date">Event Date</label>
+                    <input type="date" id="catering-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="catering-details">Event details or custom menu request</label>
+                    <textarea id="catering-details" rows="3" placeholder="e.g. Need Veg Meals and Egg Fried Rice for lunch buffet..."></textarea>
+                </div>
+                <button class="btn btn-primary btn-block" onclick="submitCateringInquiry()">
+                    <i class="fa-brands fa-whatsapp"></i> Send Catering Inquiry on WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Write a Review Modal -->
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('review-modal')">&times;</span>
+            <div class="modal-header">
+                <h3>Write a Customer Review</h3>
+            </div>
+            <div class="modal-body">
+                <form id="review-form" onsubmit="submitReview(event)">
+                    <div class="form-group">
+                        <label for="review-name">Your Name</label>
+                        <input type="text" id="review-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-role">Your Role / Occasion</label>
+                        <input type="text" id="review-role" placeholder="e.g. Event Host, Local Customer, Wedding, Birthday" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Rating</label>
+                        <div class="rating-stars-input" id="rating-stars-input" style="display: flex; gap: 10px; font-size: 1.8rem; color: #555; cursor: pointer; margin: 10px 0;">
+                            <i class="fa-solid fa-star star-input" data-value="1"></i>
+                            <i class="fa-solid fa-star star-input" data-value="2"></i>
+                            <i class="fa-solid fa-star star-input" data-value="3"></i>
+                            <i class="fa-solid fa-star star-input" data-value="4"></i>
+                            <i class="fa-solid fa-star star-input" data-value="5"></i>
+                        </div>
+                        <input type="hidden" id="review-rating-value" value="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-text">Review Message</label>
+                        <textarea id="review-text" rows="3" placeholder="Tell others about your experience with our taste, quality, and service..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-circle-check"></i> Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         VIRTUAL RESTAURANT MENU BOOKLET (FLIPBOOK MODAL)
+         ========================================== -->
+    <div class="flipbook-modal" id="flipbook-modal" onclick="handleFlipbookBackdropClick(event)">
+        <div class="flipbook-wrapper" onclick="event.stopPropagation()">
+            <!-- Top Bar -->
+            <div class="flipbook-topbar">
+                <div class="flipbook-brand-badge">
+                    <img src="assets/images/favicon-round.png" alt="Shalem Logo">
+                    <span>Shalem Restaurant &bull; Virtual Menu</span>
+                </div>
+                <div class="flipbook-page-indicator" id="fb-page-indicator">
+                    Spread 1 of 4 &bull; Cover &amp; Heritage
+                </div>
+                <div class="flipbook-topbar-actions">
+                    <button class="fb-btn-pdf" onclick="downloadMenuPDF()" title="Download Printable Menu PDF">
+                        <i class="fa-solid fa-file-pdf"></i> <span>Download PDF</span>
+                    </button>
+                    <button class="flipbook-close-btn" onclick="closeFlipbookModal()" aria-label="Close Menu Booklet">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- The 3D Book Stage -->
+            <div class="flipbook-stage" id="flipbook-stage">
+                
+                <!-- SPREAD 0: Cover Spread -->
+                <div class="flipbook-spread active" data-spread="0">
+                    <!-- Left Page: Story, Heritage & Quick Actions -->
+                    <div class="book-page page-left book-page-details spread-cover">
+                        <div class="page-ornament-border"></div>
+                        <div class="cover-inner">
+                            <span class="cover-subtitle">Culinary Heritage</span>
+                            <h3 class="cover-title" style="font-size: 1.85rem;">15+ Years of Taste</h3>
+                            <div class="cover-divider"></div>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px;">
+                                Serving fresh, sizzling hot wok specialties, authentic aromatic dum biryani, homestyle Andhra meals, and royal catering feasts across Valluru. Every meal is freshly crafted on order with supreme hygiene.
+                            </p>
+                            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 24px; color: var(--accent); font-size: 0.85rem; flex-wrap: wrap;">
+                                <span><i class="fa-solid fa-check-circle"></i> 100% Fresh Wok</span>
+                                <span><i class="fa-solid fa-check-circle"></i> Pure Spices</span>
+                                <span><i class="fa-solid fa-check-circle"></i> Hygienic Prep</span>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 10px; max-width: 280px; margin: 0 auto;">
+                                <button class="btn btn-primary" onclick="turnFlipbookSpread(1)">
+                                    <i class="fa-solid fa-book-open"></i> Open Menu Pages &rarr;
+                                </button>
+                                <button class="btn btn-secondary" onclick="downloadMenuPDF()">
+                                    <i class="fa-solid fa-file-pdf"></i> Download Menu PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Page: The Grand Front Cover Item / Emblem Showcase -->
+                    <div class="book-page page-right book-page-preview spread-cover">
+                        <div class="page-ornament-border"></div>
+                        <div class="cover-inner">
+                            <img src="assets/images/favicon-round.png" alt="Shalem Logo" class="cover-logo">
+                            <span class="cover-subtitle">Official Dining &amp; Catering</span>
+                            <h2 class="cover-title">SHALEM RESTAURANT</h2>
+                            <p class="cover-tagline">Valluru, Andhra Pradesh &bull; Food Orders &amp; Grand Catering</p>
+                            <div class="cover-divider"></div>
+                            <div class="cover-features-grid">
+                                <div class="cover-feature-pill"><i class="fa-solid fa-fire"></i> Sizzling Wok</div>
+                                <div class="cover-feature-pill"><i class="fa-solid fa-crown"></i> Dum Biryani</div>
+                                <div class="cover-feature-pill"><i class="fa-solid fa-bowl-food"></i> Andhra Meals</div>
+                                <div class="cover-feature-pill"><i class="fa-solid fa-champagne-glasses"></i> Catering Feasts</div>
+                            </div>
+                            <p style="color: #bbb; font-size: 0.84rem; margin-top: 20px; margin-bottom: 20px;">
+                                Use the next button or category tabs below to turn pages.
+                            </p>
+                            <button class="btn btn-primary" onclick="turnFlipbookSpread(1)" style="padding: 10px 24px;">
+                                Explore Wok Specialties &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPREAD 1: Wok Masters (Fried Rice & Noodles) -->
+                <div class="flipbook-spread" data-spread="1">
+                    <!-- Left Page: Details and Buttons to Order -->
+                    <div class="book-page page-left book-page-details">
+                        <div class="page-ornament-border"></div>
+                        <div class="page-header">
+                            <i class="fa-solid fa-fire-burner page-category-icon"></i>
+                            <h3 class="page-category-title">Wok Masters &bull; Rice &amp; Noodles</h3>
+                            <p class="page-category-sub">High-flame live wok with fragrant basmati &amp; oriental seasonings</p>
+                        </div>
+                        <div class="book-hint">
+                            <i class="fa-solid fa-sparkles"></i> Click any dish to preview photo &bull; Order directly on WhatsApp
+                        </div>
+                        <div class="book-menu-list">
+                            <!-- Dish 1 -->
+                            <div class="book-menu-item active-spotlight" onclick="spotlightBookItem(this, 1)"
+                                data-title="Chicken Fried Rice"
+                                data-category="Fried Rice Special"
+                                data-img="assets/images/fried-rice.png"
+                                data-badge="Best Seller &bull; Hot Wok"
+                                data-price="₹160"
+                                data-diet="nonveg"
+                                data-desc="Succulent chicken morsels, farm eggs, and signature chef's seasonings tossed on a blazing high-flame wok."
+                                data-tags="🔥 High Flame,🥩 Tender Chicken,🌾 Basmati Rice">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon nonveg" title="Non-Vegetarian"></span>
+                                        <span class="bmi-name">Chicken Fried Rice</span>
+                                        <span class="bmi-badge">Best Seller</span>
+                                    </div>
+                                    <span class="bmi-price">₹160</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Tender chicken morsels, farm eggs &amp; signature wok spices.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Chicken Fried Rice', 'Fried Rice')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 2 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 1)"
+                                data-title="Veg Fried Rice"
+                                data-category="Fried Rice Special"
+                                data-img="assets/images/fried-rice.png"
+                                data-badge="Pure Veg &bull; Hot Wok"
+                                data-price="₹130"
+                                data-diet="veg"
+                                data-desc="Premium basmati rice tossed with crunchy garden carrots, beans, spring onions, and authentic oriental wok seasonings."
+                                data-tags="🥕 Fresh Veggies,🌿 Mild Spices,🔥 Live Wok">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Veg Fried Rice</span>
+                                        <span class="bmi-badge">Pure Veg</span>
+                                    </div>
+                                    <span class="bmi-price">₹130</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Crisp garden carrots, beans, scallions &amp; wok spices.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Veg Fried Rice', 'Fried Rice')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 3 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 1)"
+                                data-title="Egg Fried Rice"
+                                data-category="Fried Rice Special"
+                                data-img="assets/images/fried-rice.png"
+                                data-badge="Popular Choice"
+                                data-price="₹140"
+                                data-diet="egg"
+                                data-desc="Golden fluffy scrambled eggs, spring onions, and long-grain basmati tossed with crushed black pepper & wok seasonings."
+                                data-tags="🥚 Farm Eggs,🧄 Crushed Pepper,🔥 Sizzling Wok">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon egg" title="Contains Egg"></span>
+                                        <span class="bmi-name">Egg Fried Rice</span>
+                                        <span class="bmi-badge">Popular</span>
+                                    </div>
+                                    <span class="bmi-price">₹140</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Golden farm eggs, spring onions &amp; high-flame wok rice.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Egg Fried Rice', 'Fried Rice')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 4 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 1)"
+                                data-title="Chicken Hakka Noodles"
+                                data-category="Noodles Special"
+                                data-img="assets/images/noodles.png"
+                                data-badge="Chef's Choice &bull; Noodles"
+                                data-price="₹160"
+                                data-diet="nonveg"
+                                data-desc="Springy wok noodles stir-fried with tender marinated chicken strips, scrambled eggs, and julienne crisp garden vegetables."
+                                data-tags="🍜 Springy Noodles,🍗 Chicken Strips,🥬 Crisp Veggies">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon nonveg" title="Non-Vegetarian"></span>
+                                        <span class="bmi-name">Chicken Hakka Noodles</span>
+                                        <span class="bmi-badge">Chef's Choice</span>
+                                    </div>
+                                    <span class="bmi-price">₹160</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Tender chicken strips, scrambled eggs &amp; crisp wok veggies.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Chicken Noodles', 'Noodles')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 5 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 1)"
+                                data-title="Veg / Gobi Manchurian"
+                                data-category="Crispy Starters"
+                                data-img="assets/images/noodles.png"
+                                data-badge="Crispy Starter &bull; Hot"
+                                data-price="₹140"
+                                data-diet="veg"
+                                data-desc="Crispy battered golden florets tossed in a hot tangy garlic-coriander wok glaze with spring onions."
+                                data-tags="🥦 Crispy Florets,🧄 Hot Garlic Glaze,✨ Appetizer">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Veg / Gobi Manchurian</span>
+                                        <span class="bmi-badge">Crisp Glaze</span>
+                                    </div>
+                                    <span class="bmi-price">₹140</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Crispy golden florets tossed in hot garlic-coriander wok glaze.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Gobi Manchurian', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-footer-note">
+                            <i class="fa-solid fa-fire-burner"></i> Prepared fresh on high-flame &bull; Customize spice: Mild / Medium / Andhra Spicy
+                        </div>
+                    </div>
+
+                    <!-- Right Page: The Item Visual Showcase -->
+                    <div class="book-page page-right book-page-preview">
+                        <div class="page-ornament-border"></div>
+                        <div class="book-item-spotlight" id="spotlight-card-1">
+                            <div class="spotlight-img-frame">
+                                <img id="spotlight-img-1" src="assets/images/fried-rice.png" alt="Wok Special" class="spotlight-img">
+                                <span id="spotlight-diet-1" class="diet-icon nonveg spotlight-diet-badge" title="Non-Vegetarian"></span>
+                                <span id="spotlight-badge-1" class="spotlight-badge"><i class="fa-solid fa-crown"></i> Best Seller &bull; Hot Wok</span>
+                            </div>
+                            <div class="spotlight-info">
+                                <div class="spotlight-header-row">
+                                    <span id="spotlight-cat-1" class="spotlight-category">Fried Rice Special</span>
+                                    <span class="spotlight-prep"><i class="fa-solid fa-clock"></i> Fresh on Order</span>
+                                </div>
+                                <div class="spotlight-title-row">
+                                    <h4 id="spotlight-title-1" class="spotlight-title">Chicken Fried Rice</h4>
+                                    <span id="spotlight-price-1" class="spotlight-price">₹160</span>
+                                </div>
+                                <p id="spotlight-desc-1" class="spotlight-desc">Succulent chicken morsels, farm eggs, and signature chef's seasonings tossed on a blazing high-flame wok.</p>
+                                <div id="spotlight-tags-1" class="spotlight-tags">
+                                    <span class="spotlight-tag">🔥 High Flame</span>
+                                    <span class="spotlight-tag">🥩 Tender Chicken</span>
+                                    <span class="spotlight-tag">🌾 Basmati Rice</span>
+                                </div>
+                                <button id="spotlight-btn-1" class="spotlight-order-btn" onclick="openOrderModal('Chicken Fried Rice', 'Fried Rice')">
+                                    <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp &bull; ₹160
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPREAD 2: Royal Biryani & Traditional Meals -->
+                <div class="flipbook-spread" data-spread="2">
+                    <!-- Left Page: Details and Buttons to Order -->
+                    <div class="book-page page-left book-page-details">
+                        <div class="page-ornament-border"></div>
+                        <div class="page-header">
+                            <i class="fa-solid fa-crown page-category-icon"></i>
+                            <h3 class="page-category-title">Royal Biryani &amp; Andhra Meals</h3>
+                            <p class="page-category-sub">Layered slow-dum basmati rice, rich gravies &amp; traditional feasts</p>
+                        </div>
+                        <div class="book-hint">
+                            <i class="fa-solid fa-sparkles"></i> Click any dish to preview photo &bull; Order directly on WhatsApp
+                        </div>
+                        <div class="book-menu-list">
+                            <!-- Dish 1 -->
+                            <div class="book-menu-item active-spotlight" onclick="spotlightBookItem(this, 2)"
+                                data-title="Royal Chicken Dum Biryani"
+                                data-category="Royal Biryani"
+                                data-img="assets/images/hero-banner.png"
+                                data-badge="Royal Signature &bull; Dum Cooked"
+                                data-price="₹220"
+                                data-diet="nonveg"
+                                data-desc="Aromatic long-grain basmati rice slow-cooked in sealed degh with tender spiced chicken, saffron &amp; pure ghee."
+                                data-tags="👑 Sealed Degh,🧈 Pure Ghee,🌶️ Andhra Spices">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon nonveg" title="Non-Vegetarian"></span>
+                                        <span class="bmi-name">Royal Chicken Dum Biryani</span>
+                                        <span class="bmi-badge">Signature</span>
+                                    </div>
+                                    <span class="bmi-price">₹220</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Aromatic dum basmati slow-cooked with spiced marinated chicken.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Biryani', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 2 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 2)"
+                                data-title="Special Egg Biryani"
+                                data-category="Royal Biryani"
+                                data-img="assets/images/hero-banner.png"
+                                data-badge="Flavorsome Biryani"
+                                data-price="₹160"
+                                data-diet="egg"
+                                data-desc="Fragrant saffron-tinted basmati rice infused with spiced pan-roasted eggs, fried onions, and fresh mint."
+                                data-tags="🥚 Roasted Eggs,🌿 Fresh Mint,🌾 Saffron Rice">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon egg" title="Contains Egg"></span>
+                                        <span class="bmi-name">Special Egg Biryani</span>
+                                        <span class="bmi-badge">Flavorsome</span>
+                                    </div>
+                                    <span class="bmi-price">₹160</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Fragrant saffron basmati layered with spiced pan-roasted eggs.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Egg Biryani', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 3 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 2)"
+                                data-title="Shalem Special Veg Biryani"
+                                data-category="Royal Biryani"
+                                data-img="assets/images/hero-banner.png"
+                                data-badge="Pure Ghee Dum"
+                                data-price="₹150"
+                                data-diet="veg"
+                                data-desc="Fresh paneer cubes, garden green peas, carrots, and whole spices layered with aged basmati in authentic dum style."
+                                data-tags="🧀 Fresh Paneer,🧈 Pure Ghee,🥕 Garden Veggies">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Shalem Special Veg Biryani</span>
+                                        <span class="bmi-badge">Pure Ghee</span>
+                                    </div>
+                                    <span class="bmi-price">₹150</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Fresh paneer, garden peas &amp; whole spices in sealed dum style.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Veg Biryani', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 4 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 2)"
+                                data-title="Traditional Andhra Meals"
+                                data-category="Homestyle Andhra"
+                                data-img="assets/images/event-catering.png"
+                                data-badge="Complete Traditional Feast"
+                                data-price="₹120"
+                                data-diet="veg"
+                                data-desc="Steamed hot rice, hearty pappu, seasonal vegetable curry, tangy sambar, pepper rasam, fresh curd, and crisp papad."
+                                data-tags="🍚 Steamed Rice,🥣 Andhra Pappu,🌶️ Tangy Rasam">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Traditional Andhra Meals</span>
+                                        <span class="bmi-badge">Full Feast</span>
+                                    </div>
+                                    <span class="bmi-price">₹120</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Steamed rice, pappu, veg curry, sambar, rasam, curd &amp; papad.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Traditional Meals', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dish 5 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 2)"
+                                data-title="Andhra Chicken Curry &amp; Rice"
+                                data-category="Homestyle Andhra"
+                                data-img="assets/images/event-catering.png"
+                                data-badge="Spicy Gravy Special"
+                                data-price="₹190"
+                                data-diet="nonveg"
+                                data-desc="Succulent chicken cooked in stone-ground fiery Andhra spices, served with steaming hot fragrant rice."
+                                data-tags="🍗 Tender Chicken,🌶️ Andhra Masala,🍚 Hot Rice">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon nonveg" title="Non-Vegetarian"></span>
+                                        <span class="bmi-name">Andhra Chicken Curry &amp; Rice</span>
+                                        <span class="bmi-badge">Spicy</span>
+                                    </div>
+                                    <span class="bmi-price">₹190</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Tender chicken in stone-ground Andhra spices with steamed rice.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Chicken Curry', 'Curries')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-footer-note">
+                            <i class="fa-solid fa-crown"></i> Slow dum cooked in sealed degh with pure ghee &amp; hand-ground spices
+                        </div>
+                    </div>
+
+                    <!-- Right Page: The Item Visual Showcase -->
+                    <div class="book-page page-right book-page-preview">
+                        <div class="page-ornament-border"></div>
+                        <div class="book-item-spotlight" id="spotlight-card-2">
+                            <div class="spotlight-img-frame">
+                                <img id="spotlight-img-2" src="assets/images/hero-banner.png" alt="Royal Biryani" class="spotlight-img">
+                                <span id="spotlight-diet-2" class="diet-icon nonveg spotlight-diet-badge" title="Non-Vegetarian"></span>
+                                <span id="spotlight-badge-2" class="spotlight-badge"><i class="fa-solid fa-crown"></i> Royal Signature &bull; Dum Cooked</span>
+                            </div>
+                            <div class="spotlight-info">
+                                <div class="spotlight-header-row">
+                                    <span id="spotlight-cat-2" class="spotlight-category">Royal Biryani Special</span>
+                                    <span class="spotlight-prep"><i class="fa-solid fa-clock"></i> Slow Dum Cooked</span>
+                                </div>
+                                <div class="spotlight-title-row">
+                                    <h4 id="spotlight-title-2" class="spotlight-title">Royal Chicken Dum Biryani</h4>
+                                    <span id="spotlight-price-2" class="spotlight-price">₹220</span>
+                                </div>
+                                <p id="spotlight-desc-2" class="spotlight-desc">Aromatic long-grain basmati rice slow-cooked in sealed degh with tender spiced chicken, whole spices, saffron &amp; pure ghee.</p>
+                                <div id="spotlight-tags-2" class="spotlight-tags">
+                                    <span class="spotlight-tag">👑 Sealed Degh</span>
+                                    <span class="spotlight-tag">🧈 Pure Ghee</span>
+                                    <span class="spotlight-tag">🌶️ Andhra Spices</span>
+                                </div>
+                                <button id="spotlight-btn-2" class="spotlight-order-btn" onclick="openOrderModal('Biryani', 'Special Orders')">
+                                    <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp &bull; ₹220
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SPREAD 3: Desserts & Grand Event Catering -->
+                <div class="flipbook-spread" data-spread="3">
+                    <!-- Left Page: Details and Buttons to Order -->
+                    <div class="book-page page-left book-page-details">
+                        <div class="page-ornament-border"></div>
+                        <div class="page-header">
+                            <i class="fa-solid fa-champagne-glasses page-category-icon"></i>
+                            <h3 class="page-category-title">Grand Catering &amp; Desserts</h3>
+                            <p class="page-category-sub">Hospitality for 20 to 2000+ guests &amp; royal sweet finishes</p>
+                        </div>
+                        <div class="book-hint">
+                            <i class="fa-solid fa-sparkles"></i> Select package or dessert &bull; Inquire directly on WhatsApp
+                        </div>
+                        <div class="book-menu-list">
+                            <!-- Catering 1 -->
+                            <div class="book-menu-item active-spotlight" onclick="spotlightBookItem(this, 3)"
+                                data-title="Weddings &amp; Receptions Catering"
+                                data-category="Catering Feasts"
+                                data-img="assets/images/catering-buffet.png"
+                                data-badge="Royal Multi-Course Feast"
+                                data-price="Custom Menu"
+                                data-diet="veg"
+                                data-desc="Complete multi-course royal menus with live counters, elegant buffet stalls, and courteous serving staff for 50 to 2000+ guests."
+                                data-tags="🎪 50-2000+ Guests,🍱 Buffet/Leaf,⭐ 100% Hygienic"
+                                data-is-catering="true"
+                                data-event-type="Wedding Feast">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <i class="fa-solid fa-gem" style="color: var(--accent);"></i>
+                                        <span class="bmi-name">Weddings &amp; Receptions</span>
+                                        <span class="bmi-badge">Buffet / Leaf</span>
+                                    </div>
+                                    <span class="bmi-price">Package</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Complete multi-course royal feast with live counters &amp; staff.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); closeFlipbookModal(); openCateringModal('Wedding Feast');">Inquire <i class="fa-solid fa-calendar-check"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Catering 2 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 3)"
+                                data-title="Birthdays &amp; Family Parties"
+                                data-category="Party Catering"
+                                data-img="assets/images/event-catering.png"
+                                data-badge="Crowd Favorite Package"
+                                data-price="Party Packs"
+                                data-diet="veg"
+                                data-desc="Hot fried rice, noodles, crispy starters, curries, and sweets tailored for birthday parties and cheerful family get-togethers."
+                                data-tags="🎉 Party Packs,🍜 Hot Wok Stalls,🍰 Custom Menu"
+                                data-is-catering="true"
+                                data-event-type="Birthday Party">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <i class="fa-solid fa-cake-candles" style="color: var(--accent);"></i>
+                                        <span class="bmi-name">Birthdays &amp; Parties</span>
+                                        <span class="bmi-badge">Party Pack</span>
+                                    </div>
+                                    <span class="bmi-price">Custom</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Hot fried rice, noodles, crispy starters &amp; sweets tailored for groups.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); closeFlipbookModal(); openCateringModal('Birthday Party');">Inquire <i class="fa-solid fa-calendar-check"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dessert 1 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 3)"
+                                data-title="Warm Gulab Jamun"
+                                data-category="Desserts"
+                                data-img="assets/images/catering-buffet.png"
+                                data-badge="Traditional Sweet"
+                                data-price="₹60"
+                                data-diet="veg"
+                                data-desc="Soft golden milk dumplings steeped in fragrant cardamom and saffron syrup, served warm."
+                                data-tags="🍯 Saffron Syrup,🥛 Khoya Mawa,✨ Melt in Mouth">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Warm Gulab Jamun</span>
+                                        <span class="bmi-badge">Sweet</span>
+                                    </div>
+                                    <span class="bmi-price">₹60</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Soft milk dumplings steeped in cardamom-infused saffron syrup.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Gulab Jamun', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Dessert 2 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 3)"
+                                data-title="Royal Bread Halwa"
+                                data-category="Desserts"
+                                data-img="assets/images/catering-buffet.png"
+                                data-badge="Pure Ghee Sweet"
+                                data-price="₹70"
+                                data-diet="veg"
+                                data-desc="Rich caramelized bread dessert slowly roasted in pure desi ghee, simmered with thickened milk and fried cashews."
+                                data-tags="🧈 Pure Ghee,🥜 Fried Cashews,✨ Rich Halwa">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Royal Bread Halwa</span>
+                                        <span class="bmi-badge">Pure Ghee</span>
+                                    </div>
+                                    <span class="bmi-price">₹70</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Caramelized dessert roasted in desi ghee with crunchy cashews.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Bread Halwa', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Beverage 1 -->
+                            <div class="book-menu-item" onclick="spotlightBookItem(this, 3)"
+                                data-title="Fresh Mint &amp; Lime Cooler"
+                                data-category="Refreshers"
+                                data-img="assets/images/catering-buffet.png"
+                                data-badge="Cooling Refresher"
+                                data-price="₹50"
+                                data-diet="veg"
+                                data-desc="Tangy fresh lime, crushed garden mint leaves, chilled soda, and subtle chaat seasonings for an invigorating finish."
+                                data-tags="🍋 Fresh Lime,🌿 Crushed Mint,🧊 Chilled Soda">
+                                <div class="bmi-header-row">
+                                    <div class="bmi-title-area">
+                                        <span class="diet-icon veg" title="Vegetarian"></span>
+                                        <span class="bmi-name">Fresh Mint &amp; Lime Cooler</span>
+                                        <span class="bmi-badge">Refreshing</span>
+                                    </div>
+                                    <span class="bmi-price">₹50</span>
+                                </div>
+                                <div class="bmi-details-row">
+                                    <p class="bmi-desc">Tangy fresh lime, crushed mint &amp; soda with subtle chaat seasonings.</p>
+                                    <button class="bmi-order-btn" onclick="event.stopPropagation(); openOrderModal('Mint Lime Cooler', 'Special Orders')">Order <i class="fa-brands fa-whatsapp"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-footer-note">
+                            <i class="fa-solid fa-champagne-glasses"></i> Complete hospitality for 20 to 2000+ guests &bull; Inquire package on WhatsApp
+                        </div>
+                    </div>
+
+                    <!-- Right Page: The Item Visual Showcase -->
+                    <div class="book-page page-right book-page-preview">
+                        <div class="page-ornament-border"></div>
+                        <div class="book-item-spotlight" id="spotlight-card-3">
+                            <div class="spotlight-img-frame">
+                                <img id="spotlight-img-3" src="assets/images/catering-buffet.png" alt="Grand Catering" class="spotlight-img">
+                                <span id="spotlight-diet-3" class="diet-icon veg spotlight-diet-badge" style="display:none;" title="Vegetarian"></span>
+                                <span id="spotlight-badge-3" class="spotlight-badge"><i class="fa-solid fa-gem"></i> Full-Service Hospitality</span>
+                            </div>
+                            <div class="spotlight-info">
+                                <div class="spotlight-header-row">
+                                    <span id="spotlight-cat-3" class="spotlight-category">Event Catering</span>
+                                    <span class="spotlight-prep"><i class="fa-solid fa-users"></i> 20 - 2000+ Guests</span>
+                                </div>
+                                <div class="spotlight-title-row">
+                                    <h4 id="spotlight-title-3" class="spotlight-title">Weddings &amp; Receptions Catering</h4>
+                                    <span id="spotlight-price-3" class="spotlight-price">Custom</span>
+                                </div>
+                                <p id="spotlight-desc-3" class="spotlight-desc">Complete multi-course royal menus with live counters, elegant buffet stalls, and courteous serving staff across Valluru.</p>
+                                <div id="spotlight-tags-3" class="spotlight-tags">
+                                    <span class="spotlight-tag">🎪 50-2000+ Guests</span>
+                                    <span class="spotlight-tag">🍱 Buffet/Leaf</span>
+                                    <span class="spotlight-tag">⭐ 100% Hygienic</span>
+                                </div>
+                                <button id="spotlight-btn-3" class="spotlight-order-btn" onclick="closeFlipbookModal(); openCateringModal('Wedding Feast');">
+                                    <i class="fa-solid fa-calendar-check"></i> Inquire Catering on WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Flipbook Bottom Navigation Toolbar -->
+            <div class="flipbook-toolbar">
+                <div class="flipbook-nav-btns">
+                    <button class="fb-btn-nav" id="fb-btn-prev" onclick="turnFlipbookSpread(-1)">
+                        <i class="fa-solid fa-arrow-left"></i> Prev
+                    </button>
+                    <button class="fb-btn-nav" id="fb-btn-next" onclick="turnFlipbookSpread(1)">
+                        Next <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="fb-btn-nav fb-btn-nav-pdf" onclick="downloadMenuPDF()" title="Download PDF Menu">
+                        <i class="fa-solid fa-file-pdf"></i> <span class="hide-mobile">Download</span> PDF
+                    </button>
+                </div>
+
+                <div class="flipbook-tabs">
+                    <button class="fb-tab-chip active" data-tab="0" onclick="jumpToSpread(0)">Cover</button>
+                    <button class="fb-tab-chip" data-tab="1" onclick="jumpToSpread(1)">Wok &amp; Noodles</button>
+                    <button class="fb-tab-chip" data-tab="2" onclick="jumpToSpread(2)">Biryani &amp; Meals</button>
+                    <button class="fb-tab-chip" data-tab="3" onclick="jumpToSpread(3)">Desserts &amp; Catering</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>

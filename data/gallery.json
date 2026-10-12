@@ -1,0 +1,8 @@
+[
+  { "id": "gal_1", "url": "assets/images/fried-rice.png", "title": "Chicken Fried Rice", "category": "food" },
+  { "id": "gal_2", "url": "assets/images/fried-rice.png", "title": "Veg Fried Rice", "category": "food" },
+  { "id": "gal_3", "url": "assets/images/noodles.png", "title": "Chicken Noodles", "category": "food" },
+  { "id": "gal_4", "url": "assets/images/event-catering.png", "title": "Catering Setup", "category": "catering" },
+  { "id": "gal_5", "url": "assets/images/catering-buffet.png", "title": "Buffet Counter", "category": "catering" },
+  { "id": "gal_6", "url": "assets/images/hero-banner.png", "title": "Family Function Catering", "category": "catering" }
+]

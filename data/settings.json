@@ -1,0 +1,18 @@
+{
+  "restaurantName": "Shalem Restaurant",
+  "address": "Valluru, Andhra Pradesh",
+  "phone": "9999999999",
+  "whatsapp": "919999999999",
+  "formattedPhone": "+91 99999 99999",
+  "formattedWhatsApp": "+91 99999 99999",
+  "heroTitle": "Fresh & Delicious <br>Food for <span class=\"gradient-text\">Every Occasion</span>",
+  "heroSubtitle": "Fried Rice, Noodles & Professional Catering Services in Valluru. We blend fresh ingredients, hygienic preparation, and authentic flavors to create unforgettable meals.",
+  "aboutTitle": "About Shalem Restaurant",
+  "aboutSubtitle": "Serving since 15 years",
+  "aboutDesc1": "Shalem Restaurant is dedicated to serving fresh, tasty, and hygienic food. Located in Valluru, we have built a reputation for exquisite taste and unmatched service.",
+  "aboutDesc2": "We specialize in preparing mouth-watering Fried Rice and Noodles, along with providing stellar catering services for weddings, birthdays, family functions, corporate events, and more. No matter the event scale, our goal is to deliver flavor and hospitality that delights every guest.",
+  "reviewsEnabled": true,
+  "notices": [
+    { "id": "not_1", "title": "Catering Special Offer", "text": "Get 10% discount on catering bookings of over 300 guests this festival season! Book today.", "type": "info", "enabled": true }
+  ]
+}

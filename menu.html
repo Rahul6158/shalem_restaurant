@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shalem Restaurant - Official Dining & Catering Menu</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon-round.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf.js bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #ff6b00;
+            --accent: #d4af37;
+            --accent-light: #f5df88;
+            --dark: #0b0b0f;
+            --card-bg: #14141d;
+            --border: rgba(212, 175, 55, 0.35);
+            --text-main: #f0f0f5;
+            --text-muted: #9e9eb0;
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #08080c;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.35;
+            padding: 16px 8px;
+        }
+
+        /* Top Action Bar (Hidden in Print & PDF) */
+        .action-bar {
+            max-width: 820px;
+            margin: 0 auto 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20, 20, 28, 0.95);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 9px 18px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        }
+        .action-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.98rem;
+        }
+        .action-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid var(--accent);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-act {
+            border: none;
+            padding: 7px 15px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-download {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8010 100%);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+        }
+        .btn-download:hover {
+            background: linear-gradient(135deg, #e5c158 0%, #bf9420 100%);
+            transform: translateY(-1px);
+        }
+        .btn-print {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-print:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+        .btn-back {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-back:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Printable Document Sheet - EVENLY SPACED TO FIT EXACTLY TILL THE END OF A4 */
+        .menu-sheet {
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto;
+            /* Calibrated for exact single A4 height: 297mm minus 12mm print margins = 285mm */
+            min-height: 284mm;
+            background: #0d0d14;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            padding: 16px 22px 14px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.12);
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            page-break-after: avoid !important;
+            page-break-before: avoid !important;
+        }
+
+        /* Ornate Gold Outer Filigree Border */
+        .menu-sheet::before {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            border: 1px dashed rgba(212, 175, 55, 0.35);
+            border-radius: 7px;
+            pointer-events: none;
+        }
+
+        /* Header Block */
+        .menu-header {
+            text-align: center;
+            border-bottom: 1.5px solid var(--accent);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-wrap {
+            display: inline-block;
+            margin-bottom: 3px;
+        }
+        .header-logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+        }
+        .restaurant-title {
+            font-family: var(--font-heading);
+            font-size: 1.7rem;
+            letter-spacing: 2.8px;
+            color: #ffffff;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 2px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        .restaurant-subtitle {
+            font-size: 0.78rem;
+            color: var(--accent-light);
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Tagline Ribbon */
+        .tagline-strip {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.14) 50%, rgba(212, 175, 55, 0.05) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            font-size: 0.73rem;
+            font-weight: 700;
+            color: var(--accent-light);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Menu 2-Column Grid: Stretches Evenly to Fill Page */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            flex: 1; /* Stretches to fill vertical height evenly */
+            margin-bottom: 10px;
+        }
+
+        .grid-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            height: 100%;
+        }
+
+        /* Category Section Card: Balanced & Proportional */
+        .menu-section {
+            background: rgba(20, 20, 28, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1; /* Expand smoothly */
+        }
+        .section-header-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1.2px solid rgba(212, 175, 55, 0.35);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+            color: var(--accent);
+        }
+        .section-header-row i {
+            font-size: 0.88rem;
+        }
+        .section-name {
+            font-family: var(--font-heading);
+            font-size: 0.96rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        /* Menu Items: Comfortably Spaced & Elegant */
+        .dish-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4.5px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+            flex: 1;
+        }
+        .dish-row:last-child {
+            border-bottom: none;
+            padding-bottom: 1px;
+        }
+        .dish-left {
+            flex: 1;
+            min-width: 0;
+            padding-right: 10px;
+        }
+        .dish-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dish-name-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dish-desc {
+            font-size: 0.69rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dish-badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1px 5px;
+            border-radius: 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .dish-price {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        /* Diet Icons */
+        .diet-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            border: 1.2px solid;
+            display: inline-block;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .diet-dot::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .diet-dot.veg { border-color: #2ecc71; }
+        .diet-dot.veg::after { background: #2ecc71; }
+        .diet-dot.nonveg { border-color: #e74c3c; }
+        .diet-dot.nonveg::after { background: #e74c3c; }
+        .diet-dot.egg { border-color: #f1c40f; }
+        .diet-dot.egg::after { background: #f1c40f; }
+
+        /* Grand Catering Highlight */
+        .catering-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(255, 107, 0, 0.05) 100%);
+            border: 1.2px solid var(--accent);
+            padding: 8px 11px;
+            margin-bottom: 0;
+        }
+        .catering-highlight p {
+            font-size: 0.72rem;
+            color: #d8d8e6;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        .catering-bullets {
+            list-style: none;
+            font-size: 0.7rem;
+            color: #b8b8cc;
+            margin-bottom: 6px;
+        }
+        .catering-bullets li {
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .catering-bullets i {
+            color: var(--accent);
+            font-size: 0.65rem;
+        }
+
+        /* ====================================================
+           EXECUTIVE VISITING CARD (ANCHORED AT BOTTOM)
+           ==================================================== */
+        .visiting-card-container {
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+        .visiting-card {
+            background: linear-gradient(135deg, #171622 0%, #0d0c13 50%, #161421 100%);
+            border: 1.5px solid var(--accent);
+            border-radius: 8px;
+            padding: 10px 16px;
+            position: relative;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), inset 0 0 16px rgba(212, 175, 55, 0.09);
+        }
+        .visiting-card::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border: 1px dashed rgba(212, 175, 55, 0.35);
+            border-radius: 6px;
+            pointer-events: none;
+        }
+        .vc-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        .vc-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1.25;
+        }
+        .vc-logo {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            outline: 1.5px dashed rgba(212, 175, 55, 0.45);
+            outline-offset: 2.5px;
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+            flex-shrink: 0;
+            object-fit: cover;
+            background: #0d0c13;
+        }
+        .vc-brand h3 {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1.2px;
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+        .vc-tagline {
+            font-size: 0.68rem;
+            color: var(--accent-light);
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+        .vc-subtag {
+            font-size: 0.64rem;
+            color: var(--text-muted);
+            line-height: 1.2;
+            display: block;
+        }
+        .vc-divider {
+            width: 1px;
+            height: 56px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            flex-shrink: 0;
+        }
+        .vc-right {
+            flex: 1.35;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px 14px;
+        }
+        .vc-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: #d8d8e6;
+            white-space: nowrap;
+        }
+        .vc-contact-item i {
+            color: var(--accent);
+            font-size: 0.76rem;
+            width: 14px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .vc-contact-item strong {
+            color: #ffffff;
+        }
+
+        /* Footer */
+        .menu-footer {
+            border-top: 1.2px solid rgba(212, 175, 55, 0.3);
+            padding-top: 6px;
+            text-align: center;
+            font-size: 0.68rem;
+            color: #8c8c9a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .footer-highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Print & PDF Single Page Guarantees */
+        @page {
+            size: A4 portrait;
+            margin: 6mm;
+        }
+
+        @media print {
+            body {
+                background: #08080c !important;
+                color: #f0f0f5 !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .action-bar {
+                display: none !important;
+            }
+            .menu-sheet {
+                box-shadow: none !important;
+                max-width: 100% !important;
+                min-height: 284mm !important;
+                margin: 0 !important;
+                padding: 14px 20px 10px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .visiting-card {
+                background: #141320 !important;
+                border: 1.5px solid #d4af37 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .menu-sheet {
+                min-height: auto;
+                padding: 16px 14px;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .restaurant-title {
+                font-size: 1.45rem;
+            }
+            .tagline-strip {
+                flex-direction: column;
+                gap: 2px;
+                text-align: center;
+            }
+            .vc-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .vc-divider {
+                display: none;
+            }
+            .vc-right {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+            .menu-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Action Bar -->
+    <div class="action-bar" id="action-bar">
+        <div class="action-brand">
+            <img src="assets/images/favicon-round.png" alt="Shalem Logo">
+            <span>Shalem Restaurant Menu</span>
+        </div>
+        <div class="action-buttons">
+            <button class="btn-act btn-download" onclick="generateAndSavePDF()">
+                <i class="fa-solid fa-download"></i> Download PDF
+            </button>
+            <button class="btn-act btn-print" onclick="window.print()">
+                <i class="fa-solid fa-print"></i> Print
+            </button>
+            <a href="index.html" class="btn-act btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Back to Site
+            </a>
+        </div>
+    </div>
+
+    <!-- The Printable Menu Sheet -->
+    <div class="menu-sheet" id="menu-sheet">
+        <!-- Top Container: Header & Tagline -->
+        <div class="sheet-top">
+            <!-- Header -->
+            <header class="menu-header">
+                <div class="logo-wrap">
+                    <img src="assets/images/favicon-round.png" alt="Shalem Logo" class="header-logo">
+                </div>
+                <h1 class="restaurant-title">SHALEM RESTAURANT</h1>
+                <p class="restaurant-subtitle">Valluru, Andhra Pradesh &bull; Dining &bull; Takeaway &bull; Grand Event Catering</p>
+            </header>
+
+            <!-- Tagline Ribbon -->
+            <div class="tagline-strip">
+                <span>🔥 High-Flame Live Wok</span>
+                <span>👑 Authentic Dum Biryani</span>
+                <span>🍱 20 to 2000+ Guest Catering</span>
+                <span>🌿 100% Fresh &amp; Hygienic</span>
+            </div>
+        </div>
+
+        <!-- Middle Container: Evenly Spaced 2-Column Menu Grid -->
+        <div class="menu-grid">
+            <!-- Left Column -->
+            <div class="grid-col">
+                <!-- Wok Fried Rice & Noodles -->
+                <div class="menu-section">
+                    <div class="section-header-row">
+                        <i class="fa-solid fa-fire"></i>
+                        <h2 class="section-name">Wok Fried Rice &amp; Noodles</h2>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Chicken Fried Rice</span>
+                                <span class="dish-badge">Best Seller</span>
+                            </div>
+                            <p class="dish-desc">Tender chicken morsels, farm eggs &amp; signature wok seasonings</p>
+                        </div>
+                        <span class="dish-price">₹160</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Veg Fried Rice</span>
+                                <span class="dish-badge">Pure Veg</span>
+                            </div>
+                            <p class="dish-desc">Crisp garden carrots, beans, scallions &amp; wok spices</p>
+                        </div>
+                        <span class="dish-price">₹130</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot egg" title="Egg"></span>
+                                <span class="dish-name-text">Egg Fried Rice</span>
+                                <span class="dish-badge">Popular</span>
+                            </div>
+                            <p class="dish-desc">Wok-tossed basmati with scrambled eggs &amp; spring onions</p>
+                        </div>
+                        <span class="dish-price">₹140</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Chicken Hakka Noodles</span>
+                                <span class="dish-badge">Chef's Choice</span>
+                            </div>
+                            <p class="dish-desc">Tender chicken strips, scrambled eggs &amp; crisp wok veggies</p>
+                        </div>
+                        <span class="dish-price">₹160</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Schezwan Chicken Rice</span>
+                                <span class="dish-badge">Fiery</span>
+                            </div>
+                            <p class="dish-desc">Fiery red chili wok rice with roasted garlic &amp; chicken</p>
+                        </div>
+                        <span class="dish-price">₹170</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Veg / Gobi Manchurian</span>
+                                <span class="dish-badge">Crisp Glaze</span>
+                            </div>
+                            <p class="dish-desc">Golden crisp florets tossed in hot garlic-coriander wok glaze</p>
+                        </div>
+                        <span class="dish-price">₹140</span>
+                    </div>
+                </div>
+
+                <!-- Royal Dum Biryani & Starters -->
+                <div class="menu-section">
+                    <div class="section-header-row">
+                        <i class="fa-solid fa-crown"></i>
+                        <h2 class="section-name">Royal Dum Biryani &amp; Starters</h2>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Royal Chicken Dum Biryani</span>
+                                <span class="dish-badge">Signature</span>
+                            </div>
+                            <p class="dish-desc">Slow dum cooked in sealed degh with pure desi ghee</p>
+                        </div>
+                        <span class="dish-price">₹220</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot egg" title="Egg"></span>
+                                <span class="dish-name-text">Special Egg Biryani</span>
+                                <span class="dish-badge">Flavorsome</span>
+                            </div>
+                            <p class="dish-desc">Fragrant saffron rice with pan-roasted eggs &amp; fried onions</p>
+                        </div>
+                        <span class="dish-price">₹160</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Shalem Special Veg Biryani</span>
+                                <span class="dish-badge">Pure Ghee</span>
+                            </div>
+                            <p class="dish-desc">Fresh paneer cubes, whole spices &amp; aged dum basmati</p>
+                        </div>
+                        <span class="dish-price">₹170</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Chicken 65 / Chili Chicken</span>
+                                <span class="dish-badge">Must Try</span>
+                            </div>
+                            <p class="dish-desc">Crisp golden chicken bites tossed with fresh curry leaves</p>
+                        </div>
+                        <span class="dish-price">₹190</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="grid-col">
+                <!-- Andhra Meals, Curries & Breads -->
+                <div class="menu-section">
+                    <div class="section-header-row">
+                        <i class="fa-solid fa-utensils"></i>
+                        <h2 class="section-name">Andhra Curries &amp; Meals</h2>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Traditional Andhra Meals</span>
+                                <span class="dish-badge">Full Feast</span>
+                            </div>
+                            <p class="dish-desc">Steamed rice, pappu, sambar, rasam, curd &amp; papad</p>
+                        </div>
+                        <span class="dish-price">₹120</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Country Chicken Curry</span>
+                                <span class="dish-badge">Spicy Gravy</span>
+                            </div>
+                            <p class="dish-desc">Spicy roasted coriander &amp; pepper gravy with chicken</p>
+                        </div>
+                        <span class="dish-price">₹180</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot nonveg" title="Non-Veg"></span>
+                                <span class="dish-name-text">Andhra Chicken Curry &amp; Rice</span>
+                                <span class="dish-badge">Value Combo</span>
+                            </div>
+                            <p class="dish-desc">Homestyle spicy chicken gravy paired with hot rice</p>
+                        </div>
+                        <span class="dish-price">₹180</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Paneer Butter Masala</span>
+                                <span class="dish-badge">Rich Gravy</span>
+                            </div>
+                            <p class="dish-desc">Velvety butter-tomato gravy with soft paneer cubes</p>
+                        </div>
+                        <span class="dish-price">₹160</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Rumali Roti &amp; Tawa Naan</span>
+                                <span class="dish-badge">Fresh Baked</span>
+                            </div>
+                            <p class="dish-desc">Warm, soft handkerchief-thin flatbreads freshly baked</p>
+                        </div>
+                        <span class="dish-price">₹25</span>
+                    </div>
+                </div>
+
+                <!-- Desserts & Refreshers -->
+                <div class="menu-section">
+                    <div class="section-header-row">
+                        <i class="fa-solid fa-ice-cream"></i>
+                        <h2 class="section-name">Desserts &amp; Refreshers</h2>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Warm Gulab Jamun (2 Pcs)</span>
+                                <span class="dish-badge">Sweet</span>
+                            </div>
+                            <p class="dish-desc">Milk dumplings steeped in cardamom saffron syrup</p>
+                        </div>
+                        <span class="dish-price">₹50</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Double Ka Meetha</span>
+                                <span class="dish-badge">Royal Treat</span>
+                            </div>
+                            <p class="dish-desc">Nizami bread pudding enriched with thick rabdi &amp; nuts</p>
+                        </div>
+                        <span class="dish-price">₹70</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">Fresh Mint Lime Cooler</span>
+                                <span class="dish-badge">Chilled</span>
+                            </div>
+                            <p class="dish-desc">Tangy fresh lime, crushed garden mint &amp; chilled soda</p>
+                        </div>
+                        <span class="dish-price">₹40</span>
+                    </div>
+                    <div class="dish-row">
+                        <div class="dish-left">
+                            <div class="dish-title-wrap">
+                                <span class="diet-dot veg" title="Veg"></span>
+                                <span class="dish-name-text">South Indian Filter Coffee</span>
+                                <span class="dish-badge">Aromatic</span>
+                            </div>
+                            <p class="dish-desc">Freshly brewed chicory decoction with frothy hot milk</p>
+                        </div>
+                        <span class="dish-price">₹30</span>
+                    </div>
+                </div>
+
+                <!-- Grand Event Catering -->
+                <div class="menu-section catering-highlight">
+                    <div class="section-header-row">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                        <h2 class="section-name">Grand Event Catering (20 - 2000+ Guests)</h2>
+                    </div>
+                    <p>Full-service culinary hospitality across Valluru &amp; nearby regions.</p>
+                    <ul class="catering-bullets">
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>Weddings &amp; Receptions:</strong> Multi-course live buffet or leaf feast.</li>
+                        <li><i class="fa-solid fa-circle-check"></i> <strong>Birthdays &amp; Parties:</strong> Custom hot starters, biryani &amp; sweets.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Container: Executive Visiting Card & Footer -->
+        <div class="sheet-bottom">
+            <!-- Executive Visiting Card Block -->
+            <div class="visiting-card-container">
+                <div class="visiting-card">
+                    <div class="vc-inner">
+                        <div class="vc-left">
+                            <img src="assets/images/favicon-round.png" alt="Shalem Restaurant" class="vc-logo">
+                            <div class="vc-brand">
+                                <h3>SHALEM RESTAURANT</h3>
+                                <p class="vc-tagline">Food Orders &bull; Takeaway &bull; Grand Catering</p>
+                                <span class="vc-subtag">Serving Authentic Taste Since 2009 &bull; Valluru, AP</span>
+                            </div>
+                        </div>
+                        <div class="vc-divider"></div>
+                        <div class="vc-right">
+                            <div class="vc-contact-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <span><strong>Call:</strong> +91 99999 99999</span>
+                            </div>
+                            <div class="vc-contact-item">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span><strong>WhatsApp:</strong> +91 99999 99999</span>
+                            </div>
+                            <div class="vc-contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span><strong>Location:</strong> Valluru Main Road, AP</span>
+                            </div>
+                            <div class="vc-contact-item">
+                                <i class="fa-solid fa-clock"></i>
+                                <span><strong>Timings:</strong> 11:00 AM &ndash; 11:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="menu-footer">
+                <div>
+                    <span class="footer-highlight">SHALEM RESTAURANT</span> &bull; Valluru, Andhra Pradesh
+                </div>
+                <div>
+                    Pure Desi Ghee &bull; 100% Fresh &amp; Hygienic &bull; Call or WhatsApp to Place Orders
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- PDF Generation Script -->
+    <script>
+        function generateAndSavePDF() {
+            const element = document.getElementById('menu-sheet');
+            
+            // Options for html2pdf - guaranteed single page A4 exactly filled
+            const opt = {
+                margin: [5, 5, 5, 5],
+                filename: 'Shalem-Restaurant-Menu.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2, 
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#0d0d14'
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid-all' }
+            };
+
+            if (typeof html2pdf !== 'undefined') {
+                html2pdf().set(opt).from(element).save().catch(err => {
+                    console.error('html2pdf error:', err);
+                    window.print();
+                });
+            } else {
+                window.print();
+            }
+        }
+
+        // Check URL parameters: if ?auto=1 or ?download=1, trigger PDF generation
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('download') === '1' || params.get('download') === 'pdf' || params.get('auto') === '1') {
+                setTimeout(() => {
+                    generateAndSavePDF();
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

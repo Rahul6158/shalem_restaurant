@@ -1,0 +1,11 @@
+[
+  { "id": "stock_veg_fried_rice",      "name": "Veg Fried Rice",      "category": "Fried Rice",     "available": true },
+  { "id": "stock_egg_fried_rice",      "name": "Egg Fried Rice",      "category": "Fried Rice",     "available": true },
+  { "id": "stock_chicken_fried_rice",  "name": "Chicken Fried Rice",  "category": "Fried Rice",     "available": true },
+  { "id": "stock_veg_noodles",         "name": "Veg Noodles",         "category": "Noodles",        "available": true },
+  { "id": "stock_egg_noodles",         "name": "Egg Noodles",         "category": "Noodles",        "available": true },
+  { "id": "stock_chicken_noodles",     "name": "Chicken Noodles",     "category": "Noodles",        "available": true },
+  { "id": "stock_biryani",             "name": "Biryani",             "category": "Special Orders", "available": true },
+  { "id": "stock_meals",               "name": "Traditional Meals",   "category": "Special Orders", "available": true },
+  { "id": "stock_party_orders",        "name": "Party Orders",        "category": "Special Orders", "available": true }
+]

@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Shalem Restaurant</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon-round.png">
+    <link rel="apple-touch-icon" href="assets/images/favicon-round.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #f39c12;
+            --primary-dark: #d35400;
+            --bg-dark: #09090d;
+            --card-bg: #13131a;
+            --sidebar-bg: #0e0e14;
+            --text-light: #ffffff;
+            --text-muted: #8e8e9e;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --danger: #e74c3c;
+            --success: #2ecc71;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+
+        /* Lock screen styling */
+        #auth-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .auth-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .auth-card i.lock-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .auth-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .auth-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        /* Main Workspace Structure */
+        #admin-panel {
+            display: none;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Sidebar navigation */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-header img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .menu-item button {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .menu-item button:hover, .menu-item.active button {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item.active button {
+            border-left: 3px solid var(--primary);
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--primary);
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Content Area */
+        .main-content {
+            margin-left: 260px;
+            flex-grow: 1;
+            padding: 40px;
+            min-height: 100vh;
+            width: calc(100% - 260px);
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .page-title h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* Tab panels */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards & Grids */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-info h4 {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .stat-info span {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        /* Tables */
+        .table-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Forms & Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #e67e22;
+        }
+
+        .btn-danger {
+            background: rgba(231, 76, 60, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .btn-success {
+            background: rgba(46, 204, 113, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .btn-success:hover {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* Badge status */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background: rgba(46, 204, 113, 0.15); color: var(--success); }
+        .badge-danger { background: rgba(231, 76, 60, 0.15); color: var(--danger); }
+        .badge-warning { background: rgba(241, 196, 15, 0.15); color: #f1c40f; }
+
+        /* Dialog / Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.1);
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--danger); }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* Responsive Layout styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+            }
+            .sidebar-header h3, .sidebar-menu span, .sidebar-footer span {
+                display: none;
+            }
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .sidebar-menu {
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 10px;
+            }
+            .sidebar-header {
+                padding: 12px 20px;
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUTH LOCK SCREEN -->
+    <div id="auth-screen">
+        <div class="auth-card">
+            <i class="fa-solid fa-shield-halved lock-icon"></i>
+            <h2>Secure Admin Login</h2>
+            <p>Enter the Administrator PIN to access dashboard settings.</p>
+            <form onsubmit="handlePanelAuth(event)">
+                <div class="form-group">
+                    <input type="password" id="panel-pin" class="form-control" placeholder="••••" required autofocus pattern="[0-9]*" inputmode="numeric" style="text-align: center; letter-spacing: 5px; font-size: 1.3rem;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px;">
+                    <i class="fa-solid fa-unlock-keyhole"></i> Authenticate
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN PANEL WRAPPER -->
+    <div id="admin-panel">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/images/logo.png" alt="Shalem Logo">
+                <h3>Shalem Restaurant</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active" id="menu-dashboard">
+                    <button onclick="switchTab('dashboard')"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></button>
+                </li>
+                <li class="menu-item" id="menu-status">
+                    <button onclick="switchTab('status')"><i class="fa-solid fa-power-off"></i> <span>Store Status</span></button>
+                </li>
+                <li class="menu-item" id="menu-menu">
+                    <button onclick="switchTab('menu')"><i class="fa-solid fa-utensils"></i> <span>Catering Menu</span></button>
+                </li>
+                <li class="menu-item" id="menu-enquiries">
+                    <button onclick="switchTab('enquiries')"><i class="fa-solid fa-calendar-check"></i> <span>Enquiries</span></button>
+                </li>
+                <li class="menu-item" id="menu-gallery">
+                    <button onclick="switchTab('gallery')"><i class="fa-solid fa-images"></i> <span>Gallery</span></button>
+                </li>
+                <li class="menu-item" id="menu-reviews">
+                    <button onclick="switchTab('reviews')"><i class="fa-solid fa-star-half-stroke"></i> <span>Reviews</span></button>
+                </li>
+                <li class="menu-item" id="menu-homepage">
+                    <button onclick="switchTab('homepage')"><i class="fa-solid fa-house-laptop"></i> <span>Homepage Admin</span></button>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn btn-secondary" style="width: 100%; justify-content: center; margin-bottom: 8px; text-decoration: none;">
+                    <i class="fa-solid fa-arrow-left"></i> <span>View Website</span>
+                </a>
+                <button onclick="openChangePinModal()" class="btn btn-secondary" style="width: 100%; justify-content: center; margin-bottom: 8px;">
+                    <i class="fa-solid fa-key"></i> <span>Change PIN</span>
+                </button>
+                <button onclick="handleLogout()" class="btn btn-danger" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Content Pane -->
+        <main class="main-content">
+            
+            <!-- Tab 1: Dashboard -->
+            <div class="tab-panel active" id="tab-dashboard">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Admin Dashboard</h2>
+                        <p>Real-time analytics and management stats.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h4>Store Status</h4>
+                            <span id="stat-status" class="badge badge-success">Open</span>
+                        </div>
+                        <div class="stat-icon"><i class="fa-solid fa-circle-dot"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h4>Catering Enquiries</h4>
+                            <span id="stat-bookings">0</span>
+                        </div>
+                        <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h4>Total Reviews</h4>
+                            <span id="stat-reviews">0</span>
+                        </div>
+                        <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <h4>Gallery Photos</h4>
+                            <span id="stat-gallery">0</span>
+                        </div>
+                        <div class="stat-icon"><i class="fa-solid fa-image"></i></div>
+                    </div>
+                </div>
+
+                <h3>Recent Catering Bookings</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Event Date</th>
+                                <th>Event Type</th>
+                                <th>Guests</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-bookings-tbody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-muted);">Loading bookings...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 2: Restaurant Status -->
+            <div class="tab-panel" id="tab-status">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Restaurant Status Management</h2>
+                        <p>Change store status and post closure notifications instantly.</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); max-width: 600px;">
+                    <div class="form-group">
+                        <label>Current Status</label>
+                        <div style="display: flex; gap: 15px; margin-top: 10px;">
+                            <button class="btn btn-secondary" id="btn-status-open" onclick="updateStoreState('open')" style="flex: 1; padding: 15px; justify-content: center;">
+                                <i class="fa-solid fa-circle-check" style="color: var(--success);"></i> 🟢 Open Now
+                            </button>
+                            <button class="btn btn-secondary" id="btn-status-closed" onclick="updateStoreState('closed')" style="flex: 1; padding: 15px; justify-content: center;">
+                                <i class="fa-solid fa-circle-xmark" style="color: var(--danger);"></i> 🔴 Closed Today
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="status-closure-details" style="display: none; border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+                        <div class="form-group">
+                            <label for="status-reason">Notification Closure Type</label>
+                            <select id="status-reason" class="form-control" onchange="toggleStatusCustomField()">
+                                <option value="default">🔴 Closed Today (Default)</option>
+                                <option value="maintenance">🛠️ Closed for Maintenance</option>
+                                <option value="festival">🎉 Closed for Festival Holiday</option>
+                                <option value="personal">👨‍👩‍👧‍👦 Closed Due to Personal Reasons</option>
+                                <option value="tomorrow">📅 Reopening Tomorrow</option>
+                                <option value="custom">✍️ Custom Message</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="status-custom-field" style="display: none;">
+                            <label for="status-custom-text">Custom Closure Text</label>
+                            <input type="text" id="status-custom-text" class="form-control" placeholder="e.g. Closed for private family function">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="submitStatusUpdate()" style="margin-top: 20px; width: 100%; justify-content: center;">
+                        <i class="fa-solid fa-floppy-disk"></i> Update Status Instantly
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 3: Catering Menu Management -->
+            <div class="tab-panel" id="tab-menu">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Catering Menu Management</h2>
+                        <p>Add, edit, delete, and enable/disable dishes for the interactive menu planner.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openAddDishModal()">
+                        <i class="fa-solid fa-plus"></i> Add New Food Item
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Sub-Category</th>
+                                <th>Enabled</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="menu-table-body">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted);">Loading menu...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 4: Catering Enquiry Management -->
+            <div class="tab-panel" id="tab-enquiries">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Catering Enquiry Management</h2>
+                        <p>View client inquiries, search by customer, or call/WhatsApp them directly.</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px; display: flex; gap: 15px;">
+                    <input type="text" id="search-enquiries-input" class="form-control" placeholder="🔍 Search enquiries by customer name or phone..." oninput="filterEnquiriesList()">
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Contact details</th>
+                                <th>Event Details</th>
+                                <th>Items Selected</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="enquiries-table-body">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted);">Loading enquiries...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 5: Gallery Management -->
+            <div class="tab-panel" id="tab-gallery">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Gallery Management</h2>
+                        <p>Upload catering photos and organize food presentation albums.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openAddGalleryModal()">
+                        <i class="fa-solid fa-plus"></i> Upload New Photo
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Thumbnail</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gallery-table-body">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted);">Loading gallery...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 6: Reviews & Ratings Management -->
+            <div class="tab-panel" id="tab-reviews">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Reviews & Ratings Management</h2>
+                        <p>Moderate user reviews. Approve, reject, or completely disable reviews sections.</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px;">
+                    <div>
+                        <h4 style="margin-bottom: 4px;">Enable Reviews Section</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Toggle this to show or hide the testimonials block on the landing page.</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="settings-reviews-toggle" onchange="toggleReviewsSectionGlobally()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reviewer</th>
+                                <th>Rating</th>
+                                <th>Review Content</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviews-table-body">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--text-muted);">Loading reviews...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 7: Homepage Content Management -->
+            <div class="tab-panel" id="tab-homepage">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h2>Homepage Content & Notification Admin</h2>
+                        <p>Change static texts, phone/WhatsApp links, and update alert notices displayed to customers.</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid var(--border-color); max-width: 800px; display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-size: 1.2rem; color: var(--primary);">Contact Settings</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="home-phone">Phone Number</label>
+                            <input type="text" id="home-phone" class="form-control" placeholder="9999999999">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="home-whatsapp">WhatsApp Number (inc. Country Code)</label>
+                            <input type="text" id="home-whatsapp" class="form-control" placeholder="919999999999">
+                        </div>
+                    </div>
+
+                    <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-size: 1.2rem; color: var(--primary); margin-top: 15px;">Hero Section Settings</h3>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="home-hero-title">Hero Banner Title HTML</label>
+                        <input type="text" id="home-hero-title" class="form-control">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="home-hero-sub">Hero Banner Subtitle Description</label>
+                        <textarea id="home-hero-sub" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <h3 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-size: 1.2rem; color: var(--primary); margin-top: 15px;">About Us Settings</h3>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="home-about-title">About Section Title</label>
+                        <input type="text" id="home-about-title" class="form-control">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="home-about-desc1">About Paragraph 1</label>
+                        <textarea id="home-about-desc1" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="home-about-desc2">About Paragraph 2</label>
+                        <textarea id="home-about-desc2" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="submitSettingsUpdate()" style="margin-top: 15px; justify-content: center; padding: 12px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Content Updates
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL 1: ADD/EDIT DISH -->
+    <div class="modal" id="modal-dish">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-dish-title">Add Food Item</h3>
+                <button class="modal-close" onclick="closeDishModal()">&times;</button>
+            </div>
+            <input type="hidden" id="edit-dish-id">
+            <div class="form-group">
+                <label for="dish-name">Item Name</label>
+                <input type="text" id="dish-name" class="form-control" placeholder="e.g. Mushroom Fry">
+            </div>
+            <div class="form-group">
+                <label for="dish-category">Category Tab</label>
+                <select id="dish-category" class="form-control" onchange="toggleDishSubcategoryField()">
+                    <option value="traditional">Traditional Items</option>
+                    <option value="rice">Rice & Biryani</option>
+                    <option value="curry">Curries</option>
+                    <option value="fry">Fry Items</option>
+                    <option value="bajji">Bajji Items</option>
+                    <option value="sweets_snacks">Sweets & Snacks</option>
+                </select>
+            </div>
+            <div class="form-group" id="dish-subcategory-group" style="display: none;">
+                <label for="dish-subcategory">Sub-Category</label>
+                <select id="dish-subcategory" class="form-control">
+                    <option value="">None (Standard Category)</option>
+                    <option value="veg">🥗 Veg Curries</option>
+                    <option value="nonveg">🍗 Non-Veg Curries</option>
+                    <option value="sweets">🍬 Sweets</option>
+                    <option value="snacks">🍘 Snacks & Sides</option>
+                </select>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeDishModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitDishForm()">Save Dish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD GALLERY IMAGE -->
+    <div class="modal" id="modal-gallery">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Upload New Gallery Photo</h3>
+                <button class="modal-close" onclick="closeGalleryModal()">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="gal-title">Photo Title</label>
+                <input type="text" id="gal-title" class="form-control" placeholder="e.g. Chicken Noodles Presentation">
+            </div>
+            <div class="form-group">
+                <label for="gal-category">Album Category</label>
+                <select id="gal-category" class="form-control">
+                    <option value="food">Food Items</option>
+                    <option value="catering">Catering Events</option>
+                    <option value="restaurant">Restaurant Photos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gal-url">Image URL</label>
+                <input type="text" id="gal-url" class="form-control" placeholder="e.g. assets/images/noodles.png">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeGalleryModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitGalleryForm()">Add Photo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: CHANGE PIN -->
+    <div class="modal" id="modal-change-pin">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Change Admin PIN</h3>
+                <button class="modal-close" onclick="closeChangePinModal()">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="pin-current">Current PIN</label>
+                <input type="password" id="pin-current" class="form-control" placeholder="Enter current PIN" inputmode="numeric">
+            </div>
+            <div class="form-group">
+                <label for="pin-new">New PIN</label>
+                <input type="password" id="pin-new" class="form-control" placeholder="Enter new PIN (min 4 digits)" inputmode="numeric">
+            </div>
+            <div class="form-group">
+                <label for="pin-confirm">Confirm New PIN</label>
+                <input type="password" id="pin-confirm" class="form-control" placeholder="Re-enter new PIN" inputmode="numeric">
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeChangePinModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="submitChangePinForm()"><i class="fa-solid fa-key"></i> Update PIN</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification container -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        let activeTab = 'dashboard';
+        let savedAdminPin = '';
+        let globalEnquiries = [];
+        let activeStatusOverride = 'open';
+
+        // 1. Auth management (Pure Frontend / localStorage)
+        function handlePanelAuth(event) {
+            event.preventDefault();
+            const pin = document.getElementById("panel-pin").value;
+            const currentPin = localStorage.getItem("shalem_admin_pin") || "1234";
+
+            if (pin === currentPin) {
+                savedAdminPin = pin;
+                document.getElementById("auth-screen").style.display = "none";
+                document.getElementById("admin-panel").style.display = "flex";
+                showNotification("Access Unlocked!", "success");
+                loadDashboardData();
+            } else {
+                showNotification("Incorrect credentials pin. Try again.", "error");
+                document.getElementById("panel-pin").value = "";
+            }
+        }
+
+        function handleLogout() {
+            savedAdminPin = '';
+            document.getElementById("panel-pin").value = '';
+            document.getElementById("admin-panel").style.display = "none";
+            document.getElementById("auth-screen").style.display = "flex";
+            showNotification("Logged out successfully.", "success");
+        }
+
+        // Tab selection switching
+        function switchTab(tabId) {
+            activeTab = tabId;
+            document.querySelectorAll(".menu-item").forEach(item => {
+                item.classList.remove("active");
+            });
+            const selectedMenu = document.getElementById(`menu-${tabId}`);
+            if (selectedMenu) selectedMenu.classList.add("active");
+
+            document.querySelectorAll(".tab-panel").forEach(panel => {
+                panel.classList.remove("active");
+            });
+            const selectedTab = document.getElementById(`tab-${tabId}`);
+            if (selectedTab) selectedTab.classList.add("active");
+
+            // Load data based on selected tab
+            if (tabId === 'dashboard') loadDashboardData();
+            else if (tabId === 'status') loadStatusData();
+            else if (tabId === 'menu') loadMenuData();
+            else if (tabId === 'enquiries') loadEnquiriesData();
+            else if (tabId === 'gallery') loadGalleryData();
+            else if (tabId === 'reviews') loadReviewsData();
+            else if (tabId === 'homepage') loadHomepageSettings();
+        }
+
+        // 2. Dashboard Overview
+        function loadDashboardData() {
+            const bookings = JSON.parse(localStorage.getItem("shalem_bookings") || "[]");
+            const reviews = JSON.parse(localStorage.getItem("shalem_reviews") || "[]");
+            const gallery = JSON.parse(localStorage.getItem("shalem_gallery") || "[]");
+            const statusData = JSON.parse(localStorage.getItem("shalem_status") || '{"status":"open"}');
+
+            document.getElementById("stat-bookings").textContent = bookings.length;
+            document.getElementById("stat-reviews").textContent = reviews.length;
+            document.getElementById("stat-gallery").textContent = gallery.length;
+
+            const statStatusBadge = document.getElementById("stat-status");
+            if (statusData.status === 'open') {
+                statStatusBadge.className = "badge badge-success";
+                statStatusBadge.textContent = "Open";
+            } else {
+                statStatusBadge.className = "badge badge-danger";
+                statStatusBadge.textContent = "Closed";
+            }
+
+            const tbody = document.getElementById("recent-bookings-tbody");
+            if (bookings.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No enquiries available.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = bookings.slice(0, 5).map(b => {
+                const dateStr = b.eventDate ? new Date(b.eventDate).toLocaleDateString() : 'N/A';
+                return `
+                    <tr>
+                        <td><strong>${b.name || 'Anonymous'}</strong></td>
+                        <td>${b.phone || 'N/A'}</td>
+                        <td>${dateStr}</td>
+                        <td>${b.eventType || 'N/A'}</td>
+                        <td>${b.guests || 0} Guests</td>
+                        <td><span class="badge badge-success">New Inquiry</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 3. Status Data Loading & Updates
+        function loadStatusData() {
+            const data = JSON.parse(localStorage.getItem("shalem_status") || '{"status":"open","reason":"default","customMessage":""}');
+            activeStatusOverride = data.status || 'open';
+            updateStatusToggleVisuals(activeStatusOverride);
+
+            const dropdown = document.getElementById("status-reason");
+            dropdown.value = data.reason || 'default';
+
+            const customText = document.getElementById("status-custom-text");
+            customText.value = data.customMessage || '';
+
+            toggleStatusCustomField();
+        }
+
+        function updateStatusToggleVisuals(status) {
+            const btnOpen = document.getElementById("btn-status-open");
+            const btnClosed = document.getElementById("btn-status-closed");
+            const closureDetails = document.getElementById("status-closure-details");
+
+            btnOpen.className = "btn btn-secondary";
+            btnClosed.className = "btn btn-secondary";
+
+            if (status === 'open') {
+                btnOpen.className = "btn btn-success";
+                closureDetails.style.display = "none";
+            } else {
+                btnClosed.className = "btn btn-danger";
+                closureDetails.style.display = "block";
+            }
+        }
+
+        function updateStoreState(state) {
+            activeStatusOverride = state;
+            updateStatusToggleVisuals(state);
+        }
+
+        function toggleStatusCustomField() {
+            const reason = document.getElementById("status-reason").value;
+            const customField = document.getElementById("status-custom-field");
+            if (reason === 'custom') {
+                customField.style.display = "block";
+            } else {
+                customField.style.display = "none";
+            }
+        }
+
+        function submitStatusUpdate() {
+            const reason = document.getElementById("status-reason").value;
+            const customMessage = document.getElementById("status-custom-text").value.trim();
+
+            if (activeStatusOverride === 'closed' && reason === 'custom' && !customMessage) {
+                showNotification("Please enter custom closure text.", "error");
+                return;
+            }
+
+            const payload = {
+                status: activeStatusOverride,
+                reason: activeStatusOverride === 'closed' ? reason : 'default',
+                customMessage: activeStatusOverride === 'closed' ? customMessage : ''
+            };
+
+            localStorage.setItem("shalem_status", JSON.stringify(payload));
+            showNotification("Restaurant status updated successfully!", "success");
+            loadStatusData();
+        }
+
+        // 4. Catering Menu Items Management
+        const DEFAULT_MENU = [
+            { id: "dish_1", name: "Rice", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_2", name: "Biryani", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_3", name: "Dum Biryani", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_4", name: "Fried Rice", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_5", name: "Mixed Biryani", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_6", name: "Pulihora", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_7", name: "Palu Annam (Milk Rice)", category: "rice", subCategory: "", enabled: true },
+            { id: "dish_8", name: "Drumstick Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_9", name: "Paneer Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_10", name: "Brinjal Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_11", name: "Guthi Vankaya Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_12", name: "Potato Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_13", name: "Pulla Makkani Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_14", name: "Gongura Senagalu", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_15", name: "Vankaya Jeedipappu", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_16", name: "Cauliflower Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_17", name: "Mirchi Ka Salan Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_18", name: "Cabbage Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_19", name: "Beans Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_20", name: "Bendakaya Pulusu", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_21", name: "Mushroom Curry", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_22", name: "Mamidikaya Jeedipappu", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_23", name: "Curd", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_24", name: "Raita", category: "curry", subCategory: "veg", enabled: true },
+            { id: "dish_25", name: "Fish Curry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_26", name: "Fish Fry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_27", name: "Chicken Curry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_28", name: "Mutton Curry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_29", name: "Chicken Fry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_30", name: "Crabs Curry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_31", name: "Prawns Curry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_32", name: "Egg Curry", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_33", name: "Chicken Kabab", category: "curry", subCategory: "nonveg", enabled: true },
+            { id: "dish_34", name: "Cauliflower Fry", category: "fry", subCategory: "", enabled: true },
+            { id: "dish_35", name: "Dondakaya Fry", category: "fry", subCategory: "", enabled: true },
+            { id: "dish_36", name: "Potato Fry", category: "fry", subCategory: "", enabled: true },
+            { id: "dish_37", name: "Cabbage Fry", category: "fry", subCategory: "", enabled: true },
+            { id: "dish_38", name: "Bendakaya Fry", category: "fry", subCategory: "", enabled: true },
+            { id: "dish_39", name: "Sambar", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_40", name: "Rasam", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_41", name: "Gumadikaya Dappalam", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_42", name: "Pappu", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_43", name: "Pappu Tomata", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_44", name: "Pappu Anabakay", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_45", name: "Pappu Mamidikay", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_46", name: "Pappu Cabbage", category: "traditional", subCategory: "", enabled: true },
+            { id: "dish_47", name: "Bread Halwa", category: "sweets_snacks", subCategory: "sweets", enabled: true },
+            { id: "dish_48", name: "Kesari", category: "sweets_snacks", subCategory: "sweets", enabled: true },
+            { id: "dish_49", name: "Halwa", category: "sweets_snacks", subCategory: "sweets", enabled: true },
+            { id: "dish_50", name: "Carrot Halwa", category: "sweets_snacks", subCategory: "sweets", enabled: true },
+            { id: "dish_51", name: "Bottle Gourd Halwa", category: "sweets_snacks", subCategory: "sweets", enabled: true },
+            { id: "dish_52", name: "Garelu (Vada)", category: "sweets_snacks", subCategory: "snacks", enabled: true },
+            { id: "dish_53", name: "Boorelu", category: "sweets_snacks", subCategory: "snacks", enabled: true },
+            { id: "dish_54", name: "Chips", category: "sweets_snacks", subCategory: "snacks", enabled: true },
+            { id: "dish_55", name: "Appadam (Papad)", category: "sweets_snacks", subCategory: "snacks", enabled: true },
+            { id: "dish_56", name: "Pachimirapakaya Bajji", category: "bajji", subCategory: "", enabled: true },
+            { id: "dish_57", name: "Aratikaya Bajji", category: "bajji", subCategory: "", enabled: true },
+            { id: "dish_58", name: "Egg Bajji", category: "bajji", subCategory: "", enabled: true },
+            { id: "dish_59", name: "Vammu Aaku Bajji", category: "bajji", subCategory: "", enabled: true },
+            { id: "dish_60", name: "Potato Bajji", category: "bajji", subCategory: "", enabled: true }
+        ];
+
+        function getStoredMenu() {
+            let menu = [];
+            try {
+                menu = JSON.parse(localStorage.getItem("shalem_menu") || "[]");
+            } catch (e) {}
+            if (!Array.isArray(menu) || menu.length === 0) {
+                menu = DEFAULT_MENU;
+                localStorage.setItem("shalem_menu", JSON.stringify(menu));
+            }
+            return menu;
+        }
+
+        function loadMenuData() {
+            const menu = getStoredMenu();
+            const tbody = document.getElementById("menu-table-body");
+            tbody.innerHTML = menu.map(dish => {
+                const catLabel = getCategoryLabel(dish.category);
+                const subCatLabel = getSubcategoryLabel(dish.subCategory);
+                const isChecked = dish.enabled ? 'checked' : '';
+                return `
+                    <tr>
+                        <td><strong>${dish.name}</strong></td>
+                        <td>${catLabel}</td>
+                        <td>${subCatLabel || '<span style="color:var(--text-muted);">None</span>'}</td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" ${isChecked} onchange="toggleDishEnabledState('${dish.id}', this.checked)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary btn-sm" onclick="openEditDishModal('${dish.id}', '${dish.name.replace(/'/g, "\\'")}', '${dish.category}', '${dish.subCategory}')"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteDishItem('${dish.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function getCategoryLabel(cat) {
+            const map = {
+                traditional: '🥣 Traditional Items',
+                rice: '🍚 Rice & Biryani',
+                curry: '🍛 Curries',
+                fry: '🍳 Fry Items',
+                bajji: '🌶️ Bajji Items',
+                sweets_snacks: '🍮 Sweets & Snacks'
+            };
+            return map[cat] || cat;
+        }
+
+        function getSubcategoryLabel(sub) {
+            const map = {
+                veg: '🥗 Veg Curries',
+                nonveg: '🍗 Non-Veg Curries',
+                sweets: '🍬 Sweets',
+                snacks: '🍘 Snacks & Sides'
+            };
+            return map[sub] || sub;
+        }
+
+        function toggleDishSubcategoryField() {
+            const cat = document.getElementById("dish-category").value;
+            const subcatGroup = document.getElementById("dish-subcategory-group");
+            if (cat === 'curry' || cat === 'sweets_snacks') {
+                subcatGroup.style.display = "block";
+            } else {
+                subcatGroup.style.display = "none";
+                document.getElementById("dish-subcategory").value = "";
+            }
+        }
+
+        function openAddDishModal() {
+            document.getElementById("modal-dish-title").textContent = "Add Food Item";
+            document.getElementById("edit-dish-id").value = "";
+            document.getElementById("dish-name").value = "";
+            document.getElementById("dish-category").value = "traditional";
+            document.getElementById("dish-subcategory").value = "";
+            toggleDishSubcategoryField();
+            document.getElementById("modal-dish").style.display = "flex";
+        }
+
+        function openEditDishModal(id, name, category, subcategory) {
+            document.getElementById("modal-dish-title").textContent = "Edit Food Item";
+            document.getElementById("edit-dish-id").value = id;
+            document.getElementById("dish-name").value = name;
+            document.getElementById("dish-category").value = category;
+            toggleDishSubcategoryField();
+            document.getElementById("dish-subcategory").value = subcategory || "";
+            document.getElementById("modal-dish").style.display = "flex";
+        }
+
+        function closeDishModal() {
+            document.getElementById("modal-dish").style.display = "none";
+        }
+
+        function submitDishForm() {
+            const id = document.getElementById("edit-dish-id").value;
+            const name = document.getElementById("dish-name").value.trim();
+            const category = document.getElementById("dish-category").value;
+            const subCategory = document.getElementById("dish-subcategory").value;
+
+            if (!name) {
+                showNotification("Please enter food item name.", "error");
+                return;
+            }
+
+            let menu = getStoredMenu();
+            if (id) {
+                const idx = menu.findIndex(d => d.id === id);
+                if (idx !== -1) {
+                    menu[idx].name = name;
+                    menu[idx].category = category;
+                    menu[idx].subCategory = subCategory;
+                }
+            } else {
+                menu.push({
+                    id: 'dish_' + Date.now(),
+                    name,
+                    category,
+                    subCategory: subCategory || '',
+                    enabled: true
+                });
+            }
+
+            localStorage.setItem("shalem_menu", JSON.stringify(menu));
+            showNotification("Food item saved successfully!", "success");
+            closeDishModal();
+            loadMenuData();
+        }
+
+        function toggleDishEnabledState(id, enabled) {
+            let menu = getStoredMenu();
+            const idx = menu.findIndex(d => d.id === id);
+            if (idx !== -1) {
+                menu[idx].enabled = !!enabled;
+                localStorage.setItem("shalem_menu", JSON.stringify(menu));
+                showNotification("Item status updated.", "success");
+            }
+        }
+
+        function deleteDishItem(id) {
+            if (!confirm("Are you sure you want to delete this food item?")) return;
+            let menu = getStoredMenu();
+            menu = menu.filter(d => d.id !== id);
+            localStorage.setItem("shalem_menu", JSON.stringify(menu));
+            showNotification("Item deleted.", "success");
+            loadMenuData();
+        }
+
+        // 5. Catering Enquiry Management
+        function loadEnquiriesData() {
+            const enquiries = JSON.parse(localStorage.getItem("shalem_bookings") || "[]");
+            globalEnquiries = enquiries;
+            renderEnquiries(enquiries);
+        }
+
+        function renderEnquiries(list) {
+            const tbody = document.getElementById("enquiries-table-body");
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No catering enquiries match search.</td></tr>`;
+                return;
+            }
+            
+            tbody.innerHTML = list.map(b => {
+                const dateStr = b.eventDate ? new Date(b.eventDate).toLocaleDateString() : 'N/A';
+                const itemsList = b.details || 'None specified';
+                const wpUrl = `https://wa.me/${b.phone ? b.phone.replace(/\D/g, '') : ''}`;
+                
+                return `
+                    <tr>
+                        <td>
+                            <strong>${b.name || 'Anonymous'}</strong><br>
+                            <span style="font-size:0.8rem; color:var(--text-muted);">${b.address || 'No Address'}</span>
+                        </td>
+                        <td>
+                            Phone: <strong>${b.phone || 'N/A'}</strong>
+                        </td>
+                        <td>
+                            Date: <strong>${dateStr}</strong><br>
+                            Type: <strong>${b.eventType || 'N/A'}</strong><br>
+                            Guests: <strong>${b.guests || 0}</strong>
+                        </td>
+                        <td>
+                            <div style="max-width: 300px; font-size: 0.85rem; max-height: 80px; overflow-y: auto;">
+                                ${itemsList}
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display:flex; flex-direction:column; gap:5px;">
+                                <a href="tel:${b.phone}" class="btn btn-secondary btn-sm" style="text-decoration:none; justify-content:center;"><i class="fa-solid fa-phone"></i> Call</a>
+                                <a href="${wpUrl}" target="_blank" class="btn btn-success btn-sm" style="text-decoration:none; justify-content:center;"><i class="fa-brands fa-whatsapp"></i> Chat</a>
+                                <button class="btn btn-danger btn-sm" onclick="deleteBookingEnquiry('${b.id}')"><i class="fa-solid fa-trash-can"></i> Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function filterEnquiriesList() {
+            const query = document.getElementById("search-enquiries-input").value.toLowerCase();
+            const filtered = globalEnquiries.filter(e => 
+                (e.name && e.name.toLowerCase().includes(query)) || 
+                (e.phone && e.phone.includes(query)) ||
+                (e.eventType && e.eventType.toLowerCase().includes(query))
+            );
+            renderEnquiries(filtered);
+        }
+
+        function deleteBookingEnquiry(id) {
+            if (!confirm("Are you sure you want to delete this catering enquiry?")) return;
+            let enquiries = JSON.parse(localStorage.getItem("shalem_bookings") || "[]");
+            enquiries = enquiries.filter(b => b.id !== id);
+            localStorage.setItem("shalem_bookings", JSON.stringify(enquiries));
+            showNotification("Enquiry deleted successfully.", "success");
+            loadEnquiriesData();
+        }
+
+        // 6. Gallery Photos Album Management
+        function loadGalleryData() {
+            let gallery = JSON.parse(localStorage.getItem("shalem_gallery") || "[]");
+            if (gallery.length === 0) {
+                gallery = [
+                    { id: "gal_1", title: "Chicken Fried Rice", category: "food", url: "assets/images/fried-rice.png" },
+                    { id: "gal_2", title: "Veg Fried Rice", category: "food", url: "assets/images/fried-rice.png" },
+                    { id: "gal_3", title: "Chicken Noodles", category: "food", url: "assets/images/noodles.png" },
+                    { id: "gal_4", title: "Catering Setup", category: "catering", url: "assets/images/event-catering.png" },
+                    { id: "gal_5", title: "Buffet Counter", category: "catering", url: "assets/images/catering-buffet.png" },
+                    { id: "gal_6", title: "Family Function Catering", category: "catering", url: "assets/images/hero-banner.png" }
+                ];
+                localStorage.setItem("shalem_gallery", JSON.stringify(gallery));
+            }
+            const tbody = document.getElementById("gallery-table-body");
+            tbody.innerHTML = gallery.map(item => {
+                return `
+                    <tr>
+                        <td><img src="${item.url}" alt="${item.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-color);"></td>
+                        <td><strong>${item.title}</strong></td>
+                        <td><span class="badge badge-warning">${item.category}</span></td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" onclick="deleteGalleryItem('${item.id}')"><i class="fa-solid fa-trash-can"></i> Remove</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function openAddGalleryModal() {
+            document.getElementById("gal-title").value = "";
+            document.getElementById("gal-category").value = "food";
+            document.getElementById("gal-url").value = "";
+            document.getElementById("modal-gallery").style.display = "flex";
+        }
+
+        function closeGalleryModal() {
+            document.getElementById("modal-gallery").style.display = "none";
+        }
+
+        function submitGalleryForm() {
+            const title = document.getElementById("gal-title").value.trim();
+            const category = document.getElementById("gal-category").value;
+            const url = document.getElementById("gal-url").value.trim();
+
+            if (!title || !url) {
+                showNotification("Please enter photo title and image path URL.", "error");
+                return;
+            }
+
+            let gallery = JSON.parse(localStorage.getItem("shalem_gallery") || "[]");
+            gallery.push({ id: 'gal_' + Date.now(), title, category, url });
+            localStorage.setItem("shalem_gallery", JSON.stringify(gallery));
+            showNotification("Photo uploaded to gallery!", "success");
+            closeGalleryModal();
+            loadGalleryData();
+        }
+
+        function deleteGalleryItem(id) {
+            if (!confirm("Are you sure you want to remove this photo?")) return;
+            let gallery = JSON.parse(localStorage.getItem("shalem_gallery") || "[]");
+            gallery = gallery.filter(item => item.id !== id);
+            localStorage.setItem("shalem_gallery", JSON.stringify(gallery));
+            showNotification("Photo removed.", "success");
+            loadGalleryData();
+        }
+
+        // 7. Testimonials Reviews Moderation
+        function loadReviewsData() {
+            let reviews = JSON.parse(localStorage.getItem("shalem_reviews") || "[]");
+            const tbody = document.getElementById("reviews-table-body");
+            if (reviews.length === 0) {
+                reviews = [
+                    { id: 'REV_1', name: 'Suresh Kumar', role: 'Event Host, Valluru', rating: 5, text: "Excellent taste and service. The Chicken Fried Rice is packed with flavor...", status: 'approved' },
+                    { id: 'REV_2', name: 'Rani Prasanna', role: 'Family Celebration, Valluru', rating: 5, text: "Best catering service for our family function. Clean buffet stall...", status: 'approved' }
+                ];
+                localStorage.setItem("shalem_reviews", JSON.stringify(reviews));
+            }
+
+            tbody.innerHTML = reviews.map(rev => {
+                const statusClass = rev.status === 'approved' ? 'badge-success' : (rev.status === 'rejected' ? 'badge-danger' : 'badge-warning');
+                const statusLabel = rev.status || 'approved';
+                return `
+                    <tr>
+                        <td>
+                            <strong>${rev.name}</strong><br>
+                            <span style="font-size:0.8rem; color:var(--text-muted);">${rev.role || 'Customer'}</span>
+                        </td>
+                        <td><span style="color:var(--primary); font-weight:700;"><i class="fa-solid fa-star"></i> ${rev.rating}</span></td>
+                        <td><p style="font-size:0.85rem; font-style:italic; max-width: 400px; max-height:80px; overflow-y:auto;">"${rev.text}"</p></td>
+                        <td><span class="badge ${statusClass}">${statusLabel}</span></td>
+                        <td>
+                            <div style="display:flex; gap:5px;">
+                                <button class="btn btn-success btn-sm" onclick="moderateReviewState('${rev.id}', 'approved')"><i class="fa-solid fa-check"></i> Approve</button>
+                                <button class="btn btn-danger btn-sm" onclick="moderateReviewState('${rev.id}', 'rejected')"><i class="fa-solid fa-xmark"></i> Reject</button>
+                                <button class="btn btn-secondary btn-sm" onclick="deleteCustomerReview('${rev.id}')"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            const settings = JSON.parse(localStorage.getItem("shalem_settings") || "{}");
+            document.getElementById("settings-reviews-toggle").checked = settings.reviewsEnabled !== false;
+        }
+
+        function moderateReviewState(id, status) {
+            let reviews = JSON.parse(localStorage.getItem("shalem_reviews") || "[]");
+            const idx = reviews.findIndex(r => r.id === id);
+            if (idx !== -1) {
+                reviews[idx].status = status;
+                localStorage.setItem("shalem_reviews", JSON.stringify(reviews));
+                showNotification(`Review status marked as ${status}.`, "success");
+                loadReviewsData();
+            }
+        }
+
+        function deleteCustomerReview(id) {
+            if (!confirm("Are you sure you want to delete this review?")) return;
+            let reviews = JSON.parse(localStorage.getItem("shalem_reviews") || "[]");
+            reviews = reviews.filter(r => r.id !== id);
+            localStorage.setItem("shalem_reviews", JSON.stringify(reviews));
+            showNotification("Review deleted.", "success");
+            loadReviewsData();
+        }
+
+        function toggleReviewsSectionGlobally() {
+            const enabled = document.getElementById("settings-reviews-toggle").checked;
+            let settings = JSON.parse(localStorage.getItem("shalem_settings") || "{}");
+            settings.reviewsEnabled = enabled;
+            localStorage.setItem("shalem_settings", JSON.stringify(settings));
+            showNotification(enabled ? "Reviews section enabled." : "Reviews section disabled.", "success");
+        }
+
+        // 8. Homepage Settings
+        function loadHomepageSettings() {
+            const data = JSON.parse(localStorage.getItem("shalem_settings") || "{}");
+            document.getElementById("home-phone").value = data.phone || '9999999999';
+            document.getElementById("home-whatsapp").value = data.whatsapp || '919999999999';
+            document.getElementById("home-hero-title").value = data.heroTitle || 'Fresh & Delicious <br>Food for <span class="gradient-text">Every Occasion</span>';
+            document.getElementById("home-hero-sub").value = data.heroSubtitle || 'Fried Rice, Noodles & Professional Catering Services in Valluru.';
+            document.getElementById("home-about-title").value = data.aboutTitle || 'About Shalem Restaurant';
+            document.getElementById("home-about-desc1").value = data.aboutDesc1 || 'Shalem Restaurant is dedicated to serving fresh, tasty, and hygienic food.';
+            document.getElementById("home-about-desc2").value = data.aboutDesc2 || 'We specialize in preparing mouth-watering Fried Rice and Noodles, along with providing stellar catering services.';
+        }
+
+        function submitSettingsUpdate() {
+            const phone = document.getElementById("home-phone").value.trim();
+            const whatsapp = document.getElementById("home-whatsapp").value.trim();
+            const heroTitle = document.getElementById("home-hero-title").value.trim();
+            const heroSubtitle = document.getElementById("home-hero-sub").value.trim();
+            const aboutTitle = document.getElementById("home-about-title").value.trim();
+            const aboutDesc1 = document.getElementById("home-about-desc1").value.trim();
+            const aboutDesc2 = document.getElementById("home-about-desc2").value.trim();
+
+            let settings = JSON.parse(localStorage.getItem("shalem_settings") || "{}");
+            Object.assign(settings, {
+                phone,
+                whatsapp,
+                formattedPhone: phone.length === 10 ? `+91 ${phone.slice(0, 5)} ${phone.slice(5)}` : phone,
+                formattedWhatsApp: whatsapp.length >= 10 ? `+91 ${whatsapp.slice(-10, -5)} ${whatsapp.slice(-5)}` : whatsapp,
+                heroTitle,
+                heroSubtitle,
+                aboutTitle,
+                aboutDesc1,
+                aboutDesc2
+            });
+
+            localStorage.setItem("shalem_settings", JSON.stringify(settings));
+            showNotification("Homepage content saved successfully!", "success");
+            loadHomepageSettings();
+        }
+
+        // 9. Change PIN Modal
+        function openChangePinModal() {
+            document.getElementById("pin-current").value = "";
+            document.getElementById("pin-new").value = "";
+            document.getElementById("pin-confirm").value = "";
+            document.getElementById("modal-change-pin").style.display = "flex";
+        }
+
+        function closeChangePinModal() {
+            document.getElementById("modal-change-pin").style.display = "none";
+        }
+
+        function submitChangePinForm() {
+            const currentPin = document.getElementById("pin-current").value.trim();
+            const newPin = document.getElementById("pin-new").value.trim();
+            const confirmPin = document.getElementById("pin-confirm").value.trim();
+            const savedPin = localStorage.getItem("shalem_admin_pin") || "1234";
+
+            if (!currentPin || !newPin || !confirmPin) {
+                showNotification("Please fill in all PIN fields.", "error");
+                return;
+            }
+            if (currentPin !== savedPin) {
+                showNotification("Current PIN is incorrect.", "error");
+                return;
+            }
+            if (newPin !== confirmPin) {
+                showNotification("New PIN and Confirm PIN do not match.", "error");
+                return;
+            }
+            if (newPin.length < 4) {
+                showNotification("PIN must be at least 4 characters.", "error");
+                return;
+            }
+
+            localStorage.setItem("shalem_admin_pin", newPin);
+            savedAdminPin = newPin;
+            showNotification("PIN changed successfully! Please remember your new PIN.", "success");
+            closeChangePinModal();
+        }
+
+        // Global Toast Notification Helper
+        function showNotification(message, type) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
